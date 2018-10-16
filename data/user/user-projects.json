@@ -1,0 +1,17 @@
+[
+    {
+        "id": "project_61766919",
+        "name": "New-Project",
+        "path": "C:\\[Games]\\ETMAP",
+        "preset": {
+            "id": "preset_1139381",
+            "backup": null
+        },
+        "map": "C:\\[Games]\\ETMAP\\etmain\\maps\\45icetest.map",
+        "game": "et",
+        "mod": {
+            "enabled": true,
+            "value": "etjump"
+        }
+    }
+]

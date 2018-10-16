@@ -4,7 +4,17 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {}
+    state: {
+        projects: { items: [] },
+        tasks: { items: [], enabled: true },
+        launchers: {
+            compiler: { items: [] },
+            game: { items: [] },
+            bspc: { items: [] },
+            master: { items: [] }
+        },
+        presets: { items: [] },
+    },
+    mutations: {},
+    actions: {}
 });

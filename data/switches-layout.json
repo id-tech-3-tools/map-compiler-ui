@@ -1,0 +1,600 @@
+[
+    {
+        "name": "bsp",
+        "groups": [
+            {
+                "name": "common",
+                "description": "",
+                "switches": [
+                    {
+                        "name": "altsplit",
+                        "description": "Alternate BSP tree splitting weights (should give more fps)"
+                    },
+                    {
+                        "name": "celshader",
+                        "description": "Sets a global cel shader name\n<shadername>",
+                        "type": "text"
+                    },
+                    {
+                        "name": "custinfoparms",
+                        "description": "Use custom surface parms definitions from custinfoparms.txt script"
+                    },
+                    {
+                        "name": "deep",
+                        "description": "Use detail brushes in the BSP tree, but at lowest priority (should give more fps)"
+                    },
+                    {
+                        "name": "de",
+                        "description": "Distance epsilon for plane snapping etc.\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "fakemap",
+                        "description": "Write fakemap.map containing all world brushes"
+                    },
+                    {
+                        "name": "flares",
+                        "description": "Turn on support for flares (TEST?)"
+                    },
+                    {
+                        "name": "flat",
+                        "description": "Enable flat shading (good for combining with -celshader)"
+                    },
+                    {
+                        "name": "fulldetail",
+                        "description": "Treat detail brushes as structural ones"
+                    },
+                    {
+                        "name": "keeplights",
+                        "description": "Keep light entities in the BSP file after compile"
+                    },
+                    {
+                        "name": "leaktest",
+                        "description": "Abort if a leak was found"
+                    },
+                    {
+                        "name": "meta",
+                        "description": "Combine adjacent triangles of the same texture to surfaces (ALWAYS USE THIS)"
+                    },
+                    {
+                        "name": "minsamplesize",
+                        "description": "Sets minimum lightmap resolution in luxels/qu\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "mi",
+                        "description": "Sets the maximum number of indexes per surface\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "mv",
+                        "description": "Sets the maximum number of vertices of a lightmapped surface\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "ne",
+                        "description": "Normal epsilon for plane snapping etc.\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "nocurves",
+                        "description": "Turn off support for patches"
+                    },
+                    {
+                        "name": "nodetail",
+                        "description": "Leave out detail brushes"
+                    },
+                    {
+                        "name": "noflares",
+                        "description": "Turn off support for flares"
+                    },
+                    {
+                        "name": "nofog",
+                        "description": "Turn off support for fog volumes"
+                    },
+                    {
+                        "name": "nohint",
+                        "description": "Turn off support for hint brushes"
+                    },
+                    {
+                        "name": "nosubdivide",
+                        "description": "Turn off support for `q3map_tessSize` (breaks water vertex deforms)"
+                    },
+                    {
+                        "name": "notjunc",
+                        "description": "Do not fix T-junctions (causes cracks between triangles, do not use)"
+                    },
+                    {
+                        "name": "nowater",
+                        "description": "Turn off support for water, slime or lava (Stef, this is for you)"
+                    },
+                    {
+                        "name": "np",
+                        "description": "Force all surfaces to be nonplanar with a given shade angle\n<A>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "onlyents",
+                        "description": "Only update entities in the BSP"
+                    },
+                    {
+                        "name": "patchmeta",
+                        "description": "Turn patches into triangle meshes for display"
+                    },
+                    {
+                        "name": "rename",
+                        "description": "Append suffix to miscmodel shaders (needed for SoF2)",
+                        "label": "fix model names"
+                    },
+                    {
+                        "name": "samplesize",
+                        "description": "Sets default lightmap resolution in luxels/qu\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "skyfix",
+                        "description": "Turn sky box into six surfaces to work around ATI problems"
+                    },
+                    {
+                        "name": "snap",
+                        "description": "Snap brush bevel planes to the given number of units\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "texrange",
+                        "description": "Limit per-surface texture range to the given number of units, and subdivide surfaces like with `q3map_tessSize` if this is not met\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "verboseentities",
+                        "description": "Enable `-v` only for map entities, not for the world"
+                    }
+                ]
+            },
+            {
+                "name": "debug",
+                "description": "bsp debug",
+                "switches": [
+                    {
+                        "name": "debuginset",
+                        "description": "Push all triangle vertexes towards the triangle center"
+                    },
+                    {
+                        "name": "debugportals",
+                        "description": "Make BSP portals visible in the map"
+                    },
+                    {
+                        "name": "debugsurfaces",
+                        "description": "Color the vertexes according to the index of the surface"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "vis",
+        "groups":  [
+            {
+                "name": "common",
+                "description": "",
+                "switches": [
+                    {
+                        "name": "fast",
+                        "description": "Only calculates rough visibility data. Quick and dirty, not actually useful for VIS purposes."
+                    },
+                    {
+                        "name": "hint",
+                        "description": "Will merge the bsp leaves (except for hint portals) before calculating the visiblity list."
+                    },
+                    {
+                        "name": "merge",
+                        "description": "Will merge the bsp leaves before calculating the visibility list."
+                    },
+                    {
+                        "name": "nopassage",
+                        "description": "Disables the passage visiblity algorithm. Passage VIS is a bit faster and tighter than the old algorithm."
+                    },
+                    {
+                        "name": "nosort",
+                        "description": "Disables the sorting of portals by complexity. Sorting speeds up visiblity calculations."
+                    },
+                    {
+                        "name": "passageOnly",
+                        "description": "Will use the passage visibility algorithm only."
+                    },
+                    {
+                        "name": "saveprt",
+                        "description": "Disables the automatic deletion of the .prt portal file after VIS finishes."
+                    },
+                    {
+                        "name": "v",
+                        "description": "Enables verbose mode. Always use this."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "light",
+        "groups": [
+            {
+                "name": "common",
+                "description": "",
+                "switches": [
+                    {
+                        "name": "approx",
+                        "description": "Vertex light approximation tolerance (never use in conjunction with deluxemapping)\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "areascale",
+                        "description": "Scaling factor for area lights (surfacelight)\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "border",
+                        "description": "Add a red border to lightmaps for debugging"
+                    },
+                    {
+                        "name": "bouncegrid",
+                        "description": "Also compute radiosity on the light grid"
+                    },
+                    {
+                        "name": "bounceonly",
+                        "description": "Only compute radiosity"
+                    },
+                    {
+                        "name": "bouncescale",
+                        "description": "Scaling factor for radiosity\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "bounce",
+                        "description": "Number of bounces for radiosity\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "cheapgrid",
+                        "description": "Use `-cheap` style lighting for radiosity"
+                    },
+                    {
+                        "name": "cheap",
+                        "description": "Abort vertex light calculations when white is reached"
+                    },
+                    {
+                        "name": "compensate",
+                        "description": "Lightmap compensate (darkening factor applied after everything else)\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "cpma",
+                        "description": "CPMA vertex lighting mode"
+                    },
+                    {
+                        "name": "custinfoparms",
+                        "description": "Read scripts/custinfoparms.txt"
+                    },
+                    {
+                        "name": "dark",
+                        "description": "Darken lightmap seams"
+                    },
+                    {
+                        "name": "deluxemode",
+                        "description": "Sets deluxemapping mode:\n0 = modelspace deluxemaps (default)\n1 = tangentspace deluxemaps\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "deluxe",
+                        "description": "Enable deluxemapping (light direction maps)"
+                    },
+                    {
+                        "name": "dirtdebug",
+                        "description": "Store the dirtmaps as lightmaps for debugging"
+                    },
+                    {
+                        "name": "dirtdepth",
+                        "description": "Dirtmapping depth"
+                    },
+                    {
+                        "name": "dirtgain",
+                        "description": "Dirtmapping exponent"
+                    },
+                    {
+                        "name": "dirtmode",
+                        "description": "Sets dirtmapping mode:\n0 = Ordered direction (default)\n1 = Randomized direction\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "dirtscale",
+                        "description": "Dirtmapping scaling factor"
+                    },
+                    {
+                        "name": "dirty",
+                        "description": "Enable dirtmapping"
+                    },
+                    {
+                        "name": "dump",
+                        "description": "Dump radiosity from `-bounce` into numbered MAP file prefabs"
+                    },
+                    {
+                        "name": "export",
+                        "description": "Export lightmaps when compile finished (like `-export` mode)"
+                    },
+                    {
+                        "name": "exposure",
+                        "description": "Lightmap exposure to better support overbright spots\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "external",
+                        "description": "Force external lightmaps even if at size of internal lightmaps"
+                    },
+                    {
+                        "name": "extravisnudge",
+                        "description": "Broken feature to nudge the luxel origin to a better vis cluster"
+                    },
+                    {
+                        "name": "extrawide",
+                        "description": "Deprecated alias for `-super 2 -filter`"
+                    },
+                    {
+                        "name": "extra",
+                        "description": "Deprecated alias for `-super 2`"
+                    },
+                    {
+                        "name": "fastallocate",
+                        "description": "Use `-fastallocate` to trade lightmap size against allocation time (useful with hi res lightmaps on large maps: reduce allocation time from days to minutes for only some extra bytes)"
+                    },
+                    {
+                        "name": "fastbounce",
+                        "description": "Use `-fast` style lighting for radiosity"
+                    },
+                    {
+                        "name": "faster",
+                        "description": "Use a faster falloff curve for lighting; also implies `-fast`"
+                    },
+                    {
+                        "name": "fastgrid",
+                        "description": "Use `-fast` style lighting for the light grid"
+                    },
+                    {
+                        "name": "fast",
+                        "description": "Ignore tiny light contributions"
+                    },
+                    {
+                        "name": "filter",
+                        "description": "Lightmap filtering"
+                    },
+                    {
+                        "name": "floodlight",
+                        "description": "Enable floodlight (zero-effort somewhat decent lighting)"
+                    },
+                    {
+                        "name": "gamma",
+                        "description": "Lightmap gamma\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "gridambientscale",
+                        "description": "Scaling factor for the light grid ambient components only\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "gridscale",
+                        "description": "Scaling factor for the light grid only\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "lightmapsize",
+                        "description": "Size of lightmaps to generate (must be a power of two)\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "lightsubdiv",
+                        "description": "Size of light emitting shader subdivision\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "lomem",
+                        "description": "Low memory but slower lighting mode"
+                    },
+                    {
+                        "name": "lowquality",
+                        "description": "Low quality floodlight (appears to currently break floodlight)"
+                    },
+                    {
+                        "name": "minsamplesize",
+                        "description": "Sets minimum lightmap resolution in luxels/qu\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "nocollapse",
+                        "description": "Do not collapse identical lightmaps"
+                    },
+                    {
+                        "name": "nodeluxe",
+                        "description": "Disable deluxemapping"
+                    },
+                    {
+                        "name": "nogrid",
+                        "description": "Disable grid light calculation (makes all entities fullbright)"
+                    },
+                    {
+                        "name": "nolightmapsearch",
+                        "description": "Do not optimize lightmap packing for GPU memory usage (as doing so costs fps)"
+                    },
+                    {
+                        "name": "normalmap",
+                        "description": "Color the lightmaps according to the direction of the surface normal (TODO is this identical to `-debugnormals`?)"
+                    },
+                    {
+                        "name": "nostyle",
+                        "description": "Disable support for light styles"
+                    },
+                    {
+                        "name": "nosurf",
+                        "description": "Disable tracing against surfaces (only uses BSP nodes then)"
+                    },
+                    {
+                        "name": "notrace",
+                        "description": "Disable shadow occlusion"
+                    },
+                    {
+                        "name": "novertex",
+                        "description": "Disable vertex lighting"
+                    },
+                    {
+                        "name": "patchshadows",
+                        "description": "Cast shadows from patches"
+                    },
+                    {
+                        "name": "pointscale",
+                        "description": "Scaling factor for point lights (light entities)\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "q3",
+                        "description": "Use nonlinear falloff curve by default (like Q3A)"
+                    },
+                    {
+                        "name": "samplescale",
+                        "description": "Scales all lightmap resolutions\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "samplesize",
+                        "description": "Sets default lightmap resolution in luxels/qu\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "samples",
+                        "description": "Adaptive supersampling quality\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "scale",
+                        "description": "Scaling factor for all light types\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "shadeangle",
+                        "description": "Angle for phong shading\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "shade",
+                        "description": "Enable phong shading at default shade angle"
+                    },
+                    {
+                        "name": "skyscale",
+                        "description": "Scaling factor for sky and sun light\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "smooth",
+                        "description": "Deprecated alias for `-samples 2`"
+                    },
+                    {
+                        "name": "style",
+                        "description": "Enable support for light styles"
+                    },
+                    {
+                        "name": "sunonly",
+                        "description": "Only compute sun light"
+                    },
+                    {
+                        "name": "super",
+                        "description": "Ordered grid supersampling quality\n<N>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "thresh",
+                        "description": "Triangle subdivision threshold\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "trianglecheck",
+                        "description": "Broken check that should ensure luxels apply to the right triangle"
+                    },
+                    {
+                        "name": "trisoup",
+                        "description": "Convert brush faces to triangle soup"
+                    },
+                    {
+                        "name": "wolf",
+                        "description": "Use linear falloff curve by default (like W:ET)"
+                    },
+                    {
+                        "name": "nofloodlight",
+                        "description": "Disables floodlighting."
+                    },
+                    {
+                        "name": "nofloodstyles",
+                        "description": "Floodlighting disabled for styled lightmaps."
+                    },
+                    {
+                        "name": "griddirectionality",
+                        "description": "...\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "gridambientdirectionality",
+                        "description": "...\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "forceVertex",
+                        "description": "..."
+                    },
+                    {
+                        "name": "noLightmap",
+                        "description": "..."
+                    },
+                    {
+                        "name": "extradist",
+                        "description": "...\n<F>",
+                        "type": "number"
+                    }
+                ]
+            },
+            {
+                "name": "debug",
+                "description": "light debug",
+                "switches": [
+                    {
+                        "name": "debugaxis",
+                        "description": "Color the lightmaps according to the lightmap axis"
+                    },
+                    {
+                        "name": "debugcluster",
+                        "description": "Color the lightmaps according to the index of the cluster"
+                    },
+                    {
+                        "name": "debugdeluxe",
+                        "description": "Show deluxemaps on the lightmap"
+                    },
+                    {
+                        "name": "debugnormals",
+                        "description": "Color the lightmaps according to the direction of the surface normal"
+                    },
+                    {
+                        "name": "debugorigin",
+                        "description": "Color the lightmaps according to the origin of the luxels"
+                    },
+                    {
+                        "name": "debugsurfaces",
+                        "description": "Color the lightmaps according to the index of the surface"
+                    },
+                    {
+                        "name": "debugunused",
+                        "description": "This option does nothing"
+                    },
+                    {
+                        "name": "debug",
+                        "description": "Mark the lightmaps according to the cluster: unmapped clusters get yellow, occluded ones get pink, flooded ones get blue overlay color, otherwise red"
+                    }
+                ]
+            }
+        ]
+    } 
+]

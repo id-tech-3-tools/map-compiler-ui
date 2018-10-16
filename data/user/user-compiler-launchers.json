@@ -1,0 +1,13 @@
+[
+    {
+        "id": "compiler_55918871",
+        "parent": "project_61766919",
+        "path": "data\\bin\\mapcompiler.exe",
+        "custom": "",
+        "enabled": true,
+        "threads": {
+            "enabled": false,
+            "value": -1
+        }
+    }
+]

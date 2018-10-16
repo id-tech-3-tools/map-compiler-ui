@@ -1,0 +1,202 @@
+[
+    {
+        "name": "qwerty",
+        "id": "preset_19617021",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {}
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {}
+            },
+            "light": {
+                "enabled": true,
+                "switches": {}
+            }
+        },
+        "draft": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "celshader": {
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {}
+            },
+            "light": {
+                "enabled": true,
+                "switches": {}
+            }
+        }
+    },
+    {
+        "name": "new",
+        "id": "preset_90099070",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {}
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {}
+            },
+            "light": {
+                "enabled": true,
+                "switches": {}
+            }
+        },
+        "draft": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "celshader": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "custinfoparms": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "leaktest": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "keeplights": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "nofog": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "nohint": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "rename": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "nosubdivide": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "notjunc": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "samplesize": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "nowater": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "nocurves": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "np": {
+                        "enabled": true,
+                        "value": "4"
+                    },
+                    "skyfix": {
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {
+                    "nopassage": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "merge": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "hint": {
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "light": {
+                "enabled": false,
+                "switches": {}
+            }
+        }
+    },
+    {
+        "name": "wqrt",
+        "id": "preset_1139381",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {}
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {}
+            },
+            "light": {
+                "enabled": true,
+                "switches": {}
+            }
+        },
+        "draft": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "custinfoparms": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "keeplights": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "nohint": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "rename": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "texrange": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "de": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "meta": {
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {}
+            },
+            "light": {
+                "enabled": true,
+                "switches": {}
+            }
+        }
+    }
+]

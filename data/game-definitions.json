@@ -1,0 +1,328 @@
+[
+    {
+        "gameId": "q3",
+        "gameName": "Q3",
+        "gameDescription": "Quake III Arena",
+        "compilerGameId": "q3",
+        "gameIcon": "",
+        "base": "baseq3",
+        "homePaths": [],
+        "installationPaths": [],
+        "engines": ["ioquake3.x86", "ioquake3.x64", "quake3"],
+        "officialPaks": [],
+        "rcon": true,
+        "engineCommands": {
+            "startDevmap": "+devmap $map",
+            "restartDevmap": "devmap $map",
+            "startMap": "+map $map",
+            "restartMap": "map $map"
+        },
+        "engineOptions" : [
+            { 
+                "name": "sv_pure", 
+                "label": "Pure Server", 
+                "title": "sv_pure\nRun pure server", 
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },  
+            { 
+                "name": "developer", 
+                "label": "Developer Mode", 
+                "title": "developer\nPrints developer messages", 
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "viewlog", 
+                "label": "Viewlog", 
+                "title": "viewlog\nOpens external game console", 
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "logfile", 
+                "label": "Logfile", 
+                "title": "logfile\nWrites game log", 
+                "type": "toggle", 
+                "values": [0, 2], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "con_drawnotify", 
+                "label": "Draw Notify", 
+                "title": "con_drawnotify\nPrints console messages in notify area",
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "com_hunkmegs", 
+                "label": "Hunkmegs", 
+                "title": "com_hunkmegs\nSets maximum RAM dedicated for a game",
+                "type": "number",
+                "values": [], 
+                "default": 192,
+                "enabled": false
+            }
+        ],
+        "compilers": ["mapcompiler", "q3map2"],
+        "BSPCs": ["bspc"]
+    },
+    {
+        "gameId": "et",
+        "gameName": "ET",
+        "gameDescription": "Wolfenstein: Enemy Territory",
+        "compilerGameId": "et",
+        "gameIcon": "",
+        "base": "etmain",
+        "homePaths": [],
+        "installationPaths": [],
+        "engines": ["ET", "ETDev", "ETe"],
+        "officialPaks": [],
+        "rcon": true,
+        "engineCommands": {
+            "startDevmap": "+devmap $map",
+            "restartDevmap": "devmap $map",
+            "startMap": "+map $map",
+            "restartMap": "map $map"
+        },
+        "engineOptions" : [
+            { 
+                "name": "sv_pure", 
+                "label": "Pure Server", 
+                "title": "sv_pure\nRun pure server", 
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },  
+            { 
+                "name": "developer", 
+                "label": "Developer Mode", 
+                "title": "developer\nPrints developer messages", 
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "viewlog", 
+                "label": "Viewlog", 
+                "title": "viewlog\nOpens external game console", 
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "logfile", 
+                "label": "Logfile", 
+                "title": "logfile\nWrites game log", 
+                "type": "toggle", 
+                "values": [0, 2], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "con_drawnotify", 
+                "label": "Draw Notify", 
+                "title": "con_drawnotify\nPrints console messages in notify area",
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "sv_fps", 
+                "label": "Server FPS", 
+                "title": "sv_fps\nSets number of frames server runs with",
+                "type": "number", 
+                "values": [], 
+                "default": 20,
+                "enabled": false
+            },
+            { 
+                "name": "com_hunkmegs", 
+                "label": "Hunkmegs", 
+                "title": "com_hunkmegs\nSets maximum RAM dedicated for a game",
+                "type": "number",
+                "values": [], 
+                "default": 192,
+                "enabled": false
+            },
+            {
+                "name": "sv_packetdelay",
+                "label": "Server Packet Delay",
+                "title": "sv_packetdealay\nSets time in milleseconds each packet is delayed to be sent by the server",
+                "type": "number",
+                "values": [],
+                "default": "0",
+                "enabled": false
+            }
+        ],
+        "compilers": ["mapcompiler", "q3map2"],
+        "BSPCs": ["bspc"]
+    },
+    {
+        "gameId": "rtcwsp",
+        "gameName": "RTCW SP",
+        "gameDescription": "Return to Castle Wolfenstein (Single Player)",
+        "compilerGameId": "wolf",
+        "gameIcon": "",
+        "base": "main",
+        "homePaths": [],
+        "installationPaths": [],
+        "engines": ["ioWolfSP.x86", "WolfSP"],
+        "officialPaks": [],
+        "rcon": false,
+        "engineCommands": {
+            "startDevmap": "+spdevmap $map",
+            "restartDevmap": "spdevmap $map",
+            "startMap": "+spmap $map",
+            "restartMap": "spmap $map"
+        },
+        "engineOptions" : [
+            { 
+                "name": "sv_pure", 
+                "label": "Pure Server", 
+                "title": "sv_pure\nRun pure server", 
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },  
+            { 
+                "name": "developer", 
+                "label": "Developer Mode", 
+                "title": "developer\nPrints developer messages", 
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "viewlog", 
+                "label": "Viewlog", 
+                "title": "viewlog\nOpens external game console", 
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "logfile", 
+                "label": "Logfile", 
+                "title": "logfile\nWrites game log", 
+                "type": "toggle", 
+                "values": [0, 2], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "con_drawnotify", 
+                "label": "Draw Notify", 
+                "title": "con_drawnotify\nPrints console messages in notify area",
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "com_hunkmegs", 
+                "label": "Hunkmegs", 
+                "title": "com_hunkmegs\nSets maximum RAM dedicated for a game",
+                "type": "number",
+                "values": [], 
+                "default": 192,
+                "enabled": false
+            }
+        ],
+        "compilers": ["mapcompiler", "q3map2"],
+        "BSPCs": ["bspc"]
+    },
+    {
+        "gameId": "rtcwmp",
+        "gameName": "RTCW MP",
+        "gameDescription": "Return to Castle Wolfenstein (Multi Player)",
+        "compilerGameId": "wolf",
+        "gameIcon": "",
+        "base": "main",
+        "homePaths": [],
+        "installationPaths": [],
+        "engines": ["ioWolfMP.x86", "WolfMP"],
+        "officialPaks": [],
+        "rcon": false,
+        "engineCommands": {
+            "startDevmap": "+devmap $map",
+            "restartDevmap": "devmap $map",
+            "startMap": "+map $map",
+            "restartMap": "map $map"
+        },
+        "engineOptions" : [
+            { 
+                "name": "sv_pure", 
+                "label": "Pure Server", 
+                "title": "sv_pure\nRun pure server", 
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },  
+            { 
+                "name": "developer", 
+                "label": "Developer Mode", 
+                "title": "developer\nPrints developer messages", 
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "viewlog", 
+                "label": "Viewlog", 
+                "title": "viewlog\nOpens external game console", 
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "logfile", 
+                "label": "Logfile", 
+                "title": "logfile\nWrites game log", 
+                "type": "toggle", 
+                "values": [0, 2], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "con_drawnotify", 
+                "label": "Draw Notify", 
+                "title": "con_drawnotify\nPrints console messages in notify area",
+                "type": "toggle", 
+                "values": [0, 1], 
+                "default": 0,
+                "enabled": true
+            },
+            { 
+                "name": "com_hunkmegs", 
+                "label": "Hunkmegs", 
+                "title": "com_hunkmegs\nSets maximum RAM dedicated for a game",
+                "type": "number",
+                "values": [], 
+                "default": 192,
+                "enabled": false
+            }
+        ],
+        "compilers": ["mapcompiler", "q3map2"],
+        "BSPCs": ["bspc"]
+    }
+]

@@ -1,0 +1,48 @@
+[
+    {
+        "id": "game_44795303",
+        "parent": "project_61766919",
+        "path": "C:\\[Games]\\ETMAP\\ET.exe",
+        "custom": "",
+        "enabled": false,
+        "devmap": true,
+        "arguments": {
+            "enabled": false,
+            "value": ""
+        },
+        "options": {
+            "sv_pure": {
+                "enabled": true,
+                "value": 1
+            },
+            "developer": {
+                "enabled": true,
+                "value": 1
+            },
+            "viewlog": {
+                "enabled": true,
+                "value": 0
+            },
+            "logfile": {
+                "enabled": true,
+                "value": 0
+            },
+            "con_drawnotify": {
+                "enabled": true,
+                "value": 0
+            },
+            "sv_fps": {
+                "enabled": false,
+                "value": 20
+            },
+            "com_hunkmegs": {
+                "enabled": false,
+                "value": 192
+            },
+            "sv_packetdelay": {
+                "enabled": false,
+                "value": "0"
+            }
+        }
+    }
+]

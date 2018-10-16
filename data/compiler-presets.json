@@ -1,0 +1,87 @@
+[
+    {
+        "id": "preset_bsponly",
+        "name": "BSP Only",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "meta": {
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "vis": {
+                "enabled": false,
+                "switches": {}
+            },
+            "light": {
+                "enabled": false,
+                "switches": {}
+            }
+        }
+    },
+    {
+        "id": "preset_visonly",
+        "name": "VIS Only",
+        "stages": {
+            "bsp": {
+                "enabled": false,
+                "switches": {}
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {
+                    "saveprt": {
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "light": {
+                "enabled": false,
+                "switches": {}
+            }
+        }
+    },
+    {
+        "id": "preset_lightonly",
+        "name": "Light Only",
+        "stages": {
+            "bsp": {
+                "enabled": false,
+                "switches": {}
+            },
+            "vis": {
+                "enabled": false,
+                "switches": {}
+            },
+            "light": {
+                "enabled": true,
+                "switches": {
+                    "fast ": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "fastallocate": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "filter": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "shade": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "patchshadows": {
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            }
+        }
+    }
+]
