@@ -1,4 +1,4 @@
-```json
+```js
 {
 	// game id, used within the project
 	"gameId": "q3",  
