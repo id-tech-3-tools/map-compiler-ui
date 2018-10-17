@@ -87,10 +87,10 @@ class GameLauncherController {
 
 		const args = new ArgumentStore();
 		const env = { map: Path.basename(project.map, '.map'), mapPath: project.map };
-		const mapStartCommand = replaceString(launcher.devmap ? engineCommands.startDevmap : engineCommands.startMap, envVars);
+		const mapStartCommand = replaceString(launcher.devmap ? engineCommands.startDevmap : engineCommands.startMap, env);
 		args.append(`+set fs_game ${mod}`);
 		args.append(...flatten(additionalOptions));
-		args.append(launcher.arguments.enabled ? replaceString(launcher.arguments.value, envVars) : "");
+		args.append(launcher.arguments.enabled ? replaceString(launcher.arguments.value, env) : "");
 		args.append(mapStartCommand);
 
 		const proc = new GameRunner(Path.resolve(path), { cwd: project.path, rcon, args: args.toArray() });
