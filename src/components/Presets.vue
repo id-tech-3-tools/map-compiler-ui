@@ -1,6 +1,6 @@
 <template>
 	<div class="preset-panel">
-		<h4>Presets</h4>
+		<!-- <h4>Presets</h4> -->
 		<div class="preset-manager-panel">
 			<preset-manager></preset-manager>
 		</div>
@@ -21,7 +21,7 @@
 
 <style scoped>
 	.preset-panel {
-		margin-bottom: 20px;
+		margin: 20px 0;
 	}
 	.preset-manager-panel {
 		margin-bottom: 20px;

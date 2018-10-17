@@ -1,6 +1,6 @@
 <template>
 	<span class="wrapper">
-		<VueButton @click="openFile" v-tooltip="title"><slot></slot></VueButton>
+		<VueButton @click="openFile" v-tooltip="title" icon-left="insert_drive_file"><slot></slot></VueButton>
 		&nbsp;
 		<span class="path" v-tooltip="value">{{ value | basename }}</span>
 	</span>

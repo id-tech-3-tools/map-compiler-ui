@@ -22,6 +22,7 @@ import PresetController from './PresetController'
 import MasterLauncherController from './MasterLauncherController'
 import FileSystemService from './FileSystemService'
 import CommonController from './CommonController'
+import OutputBufferController from "./OutputBufferController"
 
 const fileSystem = new FileSystemService();
 const api = new ApiRoute();
@@ -38,17 +39,20 @@ const storeWrapper = mapFieldWithStore(store, {
     }
 });
 
+const cwd = process.cwd();
+
+const gameDefinitions = fileSystem.jsonSync(`${cwd}/data/game-definitions.json`, true); 
 const projectCtrl = new ProjectController(storeWrapper);
 const taskCtrl = new TaskController(storeWrapper);
-const compilerLauncherCtrl = new CompilerLauncherController(storeWrapper, taskCtrl, fileSystem);
+const compilerLauncherCtrl = new CompilerLauncherController(storeWrapper, taskCtrl, gameDefinitions);
 const bspcLauncherCtrl = new BspcLauncherController(storeWrapper, taskCtrl);
-const gameLauncherCtrl = new GameLauncherController(storeWrapper, taskCtrl, fileSystem);
+const gameLauncherCtrl = new GameLauncherController(storeWrapper, taskCtrl, gameDefinitions);
 const masterLauncherCtrl = new MasterLauncherController(storeWrapper, compilerLauncherCtrl, [bspcLauncherCtrl, gameLauncherCtrl]);
 const launchersCtrl = new LaunchersController([compilerLauncherCtrl, bspcLauncherCtrl, gameLauncherCtrl, masterLauncherCtrl]); // fix master order?
 const presetCtrl = new PresetController(storeWrapper);
 const commonCtrl = new CommonController(storeWrapper);
+const outputCtrl = new OutputBufferController(storeWrapper);
 
-const cwd = process.cwd();
 // add default presets
 presetCtrl.addDefaultPresets(fileSystem.jsonSync(`${cwd}/data/compiler-presets.json`, true));
 // add user generated data
@@ -60,10 +64,13 @@ gameLauncherCtrl.addUserLaunchers(fileSystem.jsonSync(`${cwd}/data/user/user-gam
 masterLauncherCtrl.addUserLaunchers(fileSystem.jsonSync(`${cwd}/data/user/user-master-launchers.json`, true));
 taskCtrl.addUserTasks(fileSystem.jsonSync(`${cwd}/data/user/user-tasks.json`, true));
 
+outputCtrl.createMultiple(storeWrapper.projects.items.map(item => ({ parent: item.id })));
+
 api.route('/projects/create', () => {
     console.log('⚡ creating new project!');
     const project = projectCtrl.create();
     launchersCtrl.create({ parent: project.id });
+    outputCtrl.create({ parent: project.id });
 });
 
 api.route('/projects/remove', async (payload) => {
@@ -71,6 +78,7 @@ api.route('/projects/remove', async (payload) => {
     projectCtrl.remove(payload.id);
     await taskCtrl.removeBy({ parent: payload.id });
     await launchersCtrl.removeBy({ parent: payload.id });
+    outputCtrl.removeBy({ parent: payload.id });
 });
 
 api.route('/launchers/compiler/start', (payload) => {
@@ -235,6 +243,8 @@ api.route('/os/info', (payload) => {
         os: os.platform()
     }
 });
+
+window.rystore = store;
 
 new Vue({
     provide: { api },

@@ -9,13 +9,13 @@
 					<VueButton v-if="isIdle" @click="start" class="width100" :disabled="isDisabled">Start</VueButton>
 					<VueButton v-else class="width100 danger" @click="stop">Stop</VueButton>
 				</div>
-				<div>
+				<div v-tooltip="`Select task trigger event`">
 					<VueSelect v-model="task.event" class="event-list width100" placeholder="Select Event" button-class="flat">
 						<VueSelectButton v-for="(event, i) of events" :key="i" :value="event.value" :label="event.label"/>
 					</VueSelect>
 				</div>
 				<div>
-					<VueButton @click="remove" class="icon-button danger" icon-left="clear"></VueButton>
+					<VueButton @click="remove" class="icon-button danger" icon-left="close"></VueButton>
 				</div>
 			</div>
 			<div class="setting">
@@ -27,7 +27,7 @@
 				<folder-dialog v-model="task.workDir.value">Directory</folder-dialog>
 			</div>
 			<div class="setting">
-				<VueSwitch v-model="task.sync"/> &nbsp; Syncronous
+				<VueSwitch v-model="task.sync" v-tooltip="`Run task syncronously along with other tasks of the same event`" /> &nbsp; Syncronous
 			</div>
 			<div class="setting arguments-panel">
 				<div>

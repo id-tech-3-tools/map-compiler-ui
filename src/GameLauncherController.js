@@ -11,10 +11,10 @@ import TaskWorker from './TaskWorker'
 import ArgumentStore from "@/libs/ArgumentStore"
 
 class GameLauncherController {
-	constructor(store, taskCtrl, fileSystem) {
+	constructor(store, taskCtrl, gameDefinitions) {
 		this.store = store;
 		this.taskCtrl = taskCtrl;
-		this.fileSystem = fileSystem;
+		this.gameDefinitions = gameDefinitions;
 		this.workers = new Map();
 	}
 	create(props) {
@@ -38,7 +38,7 @@ class GameLauncherController {
 	async restart(id) {
 		const launcher = find(this.store.launchers.game.items, matches({ id }));
 		const project = find(this.store.projects.items, matches({ id: launcher.parent }));
-		const gameDefinition = find(this.getGameDefinitions(), matches({ gameId: project.game }));
+		const gameDefinition = find(this.gameDefinitions, matches({ gameId: project.game }));
 		const worker = this.workers.get(launcher.id);
 		if (gameDefinition.rcon) {
 			if (worker) await worker.restart();
@@ -58,7 +58,7 @@ class GameLauncherController {
 		const project = find(this.store.projects.items, matches({ id: parent }));
 		const path = launcher.path ? launcher.path : launcher.custom;
 		const tasksEnabled = this.store.tasks.enabled;
-		const gameDefinition = find(this.getGameDefinitions(), matches({ gameId: project.game }));
+		const gameDefinition = find(this.gameDefinitions, matches({ gameId: project.game }));
 		const rcon = gameDefinition.rcon ? randomizePort() : undefined;
 		const mod = defaultTo(project.mod.enabled ? project.mod.value : undefined, gameDefinition.base);
 		const { engineCommands } = gameDefinition;
@@ -131,9 +131,6 @@ class GameLauncherController {
 		const { items } = this.store.launchers.game;
 		const tasks = filter(items, matches(pairs));
 		await Promise.all(tasks.map(async (task) => await this.stop(task.id)));
-	}
-	getGameDefinitions() {
-		return this.fileSystem.jsonSync(`${process.cwd()}/data/game-definitions.json`, true);
 	}
 	addUserLaunchers(userLaunchers) {
 		if (!userLaunchers) return;

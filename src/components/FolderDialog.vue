@@ -1,6 +1,6 @@
 <template>
 	<span>
-		<VueButton @click="openFolder" v-tooltip="title"><slot></slot></VueButton>
+		<VueButton @click="openFolder" v-tooltip="title" icon-left="folder_open"><slot></slot></VueButton>
 		&nbsp;
 		<span class="path" v-tooltip="value">{{ value }}</span>
 	</span>
