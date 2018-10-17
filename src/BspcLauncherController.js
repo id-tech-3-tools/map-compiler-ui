@@ -76,7 +76,7 @@ class BspcLauncherController {
 		const stopTasks = [stopTask('before-bspc'), () => proc.kill(), stopTask('after-bspc')];
 		const worker = new TaskWorker(startTasks, stopTasks);
 
-		proc.on('data', chunk => console.log(chunk.toString('ascii')));
+		// proc.on('data', chunk => console.log(chunk.toString('ascii')));
 		proc.on('error', (error) => launcher.message = error);
 
 		this._wokerStarts(launcher, worker);

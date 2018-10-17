@@ -3,46 +3,21 @@
 		<div class="menu-panel">
 			<div class="menu-panel-list">
 				<VueSelect v-model="presets.selected" placeholder="Select preset" class="preset-selector" v-tooltip="`Select preset`">
-					<VueSelectButton v-for="preset in presets.items" :value="preset.value" :key="preset.value" :label="getLabel(preset)" />
+					<VueSelectButton 
+						v-for="preset in presets.items" 
+						:value="preset.value" 
+						:key="preset.value" 
+						:label="getLabel(preset)" 
+						:icon-left="preset.frozen ? 'lock' : 'lock_open'"/>
 				</VueSelect>
 			</div>
 			<div class="menu-panel-ctrl">
 				<VueButton @click="add" class="icon-button" icon-left="note_add" v-tooltip="`Add preset`"/>
-				<VueButton 
-					@click="reset" 
-					class="icon-button" 
-					icon-left="undo" 
-					:disabled="isEmpty || isFrozen" 
-					v-tooltip="`Reset preset`"
-				/>
-				<VueButton 
-					@click="save" 
-					class="icon-button"
-					icon-left="save" 
-					:disabled="isEmpty || isFrozen" 
-					v-tooltip="`Save preset`"
-				/>
-				<VueButton 
-					@click="copy" 
-					class="icon-button"
-					icon-left="add_to_photos" 
-					:disabled="isEmpty" 
-					v-tooltip="`Copy preset`"
-				/>
-				<VueButton 
-					@click="edit" 
-					class="icon-button"
-					icon-left="edit"
-					:disabled="isEmpty || isFrozen" 
-					v-tooltip="`Edit preset`"
-				/>
-				<VueButton 
-					@click="remove" 
-					class="icon-button danger"
-					icon-left="clear"
-					:disabled="isEmpty || isFrozen"
-					v-tooltip="`Delete preset`"
-				/>
+				<VueButton @click="reset" class="icon-button" icon-left="undo" :disabled="isEmpty || isFrozen" v-tooltip="`Reset preset`"/>
+				<VueButton @click="save" class="icon-button" icon-left="save" :disabled="isEmpty || isFrozen" v-tooltip="`Save preset`"/>
+				<VueButton @click="copy" class="icon-button" icon-left="add_to_photos" :disabled="isEmpty" v-tooltip="`Copy preset`"/>
+				<VueButton @click="edit" class="icon-button" icon-left="edit" :disabled="isEmpty || isFrozen" v-tooltip="`Edit preset`"/>
+				<VueButton @click="remove" class="icon-button danger" icon-left="close" :disabled="isEmpty || isFrozen" v-tooltip="`Delete preset`"/>
 			</div>
 		</div>
 	</div>
@@ -76,7 +51,7 @@
 		},
 		methods: {
 			getLabel(preset) {
-				return (preset.temp ? "temp: " : "" ) + `${preset.label}` + (preset.modified ? " *" : "");
+				return (preset.temp ? "deleted: " : "" ) + `${preset.label}` + (preset.modified ? " *" : "");
 			},
 			add() {
 				this.$emit('action', { type: "show-create" });

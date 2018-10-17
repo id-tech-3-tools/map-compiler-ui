@@ -14,6 +14,9 @@ export default new Vuex.Store({
             master: { items: [] }
         },
         presets: { items: [] },
+        output: {
+            items: []
+        }
     },
     mutations: {},
     actions: {}

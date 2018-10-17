@@ -1,10 +1,20 @@
 <template>
 	<div>
-		<h3>
-			<VueSwitch v-model="enabled" v-tooltip="toggleTitle"/>
-			&nbsp; Tasks &nbsp;
-			<VueButton @click="addTask" class="icon-button" icon-left="note_add" v-tooltip="`Add new task`"/>
-		</h3>
+		<div class="tasks-header">
+			<div>
+				<span class="tasks-header-toggle">
+					<VueSwitch v-model="enabled" v-tooltip="toggleTitle"/>
+				</span>
+			</div>
+			<div>
+				<h4>Tasks</h4>
+			</div>
+			<div>
+				<span class="tasks-header-button">
+					<VueButton @click="addTask" class="icon-button" icon-left="note_add" v-tooltip="`Add new task`"/>
+				</span>
+			</div>
+		</div>
 		<div>
 			<div v-for="task of tasks" :key="task.id" class="task-wrapper">
 				<task :task="task" @start="startTask" @stop="stopTask" @remove="removeTask"/>
@@ -60,5 +70,12 @@
 <style scoped>
 	.task-wrapper {
 		margin-bottom: 5px;
+	}
+	.tasks-header {
+		height: 40px;
+		margin-bottom: 10px;
+		display: grid;
+		grid-gap: 10px;
+		grid-template-columns:  36px auto 32px;
 	}
 </style>

@@ -13,8 +13,17 @@
 			</div>
 			<div>
 				<div class="main">
-					<compiler></compiler>
-					<presets></presets> 
+					<div class="main-contents">
+						<compiler></compiler>
+						<VueTabs :tab-id.sync="tabId" group-class="primary start" animate>
+							<VueTab id="tab-presets" label="Presets" icon="assignment_turned_in">
+								<div class="tab-content"><presets></presets></div>
+							</VueTab>
+							<VueTab id="tab-output" label="Output" icon="announcement">
+								<div class="tab-content"><output-printer></output-printer></div>
+							</VueTab>
+						</VueTabs>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -34,8 +43,12 @@
 	import Tasks from "@/components/Tasks"
 	import Compiler from "@/components/Compiler"
 	import Presets from "@/components/Presets"
+	import OutputPrinter from "@/components/OutputPrinter"
 
 	export default {
+		data() {
+			return { tabId: 'tab-presets' }
+		},
 		computed: {
 			projectId() {
 				return this.$route.params.id;
@@ -46,7 +59,7 @@
 				}
 			})
 		},
-		components: { ProjectSettings, Launchers, Tasks, Compiler, Presets }
+		components: { ProjectSettings, Launchers, Tasks, Compiler, Presets, OutputPrinter }
 	}
 </script>
 
@@ -64,10 +77,12 @@
 		box-sizing: border-box;
 	}
 	.main {
-		padding: 10px;
 		height: 100%;
 		overflow: auto;
 		box-sizing: border-box;
+	}
+	.main-contents {
+		padding: 10px;
 	}
 	.backBtn {
 		margin: 20px 0;

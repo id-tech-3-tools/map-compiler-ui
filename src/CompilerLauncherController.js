@@ -10,11 +10,11 @@ import CompilerRunner from "@/libs/CompilerRunner"
 import TaskWorker from "./TaskWorker"
 
 class CompilerLauncherController {
-	constructor(store, taskCtrl, fileSystem) {
+	constructor(store, taskCtrl, gameDefinitions) {
 		this.store = store;
 		this.taskCtrl = taskCtrl;
 		this.workers = new Map();
-		this.fileSystem = fileSystem;
+		this.gameDefinitions = gameDefinitions;
 	}
 	create(props) {
 		const launcher = new CompilerLauncher(props);
@@ -48,7 +48,7 @@ class CompilerLauncherController {
 		const { project, preset } = this.store;
 		const { path: cwd, map: mapPath, game: gameId } = project;
 		const tasksEnabled = this.store.tasks.enabled;
-		const gameDefinition = find(this.getGameDefinitions(), matches({ gameId }));
+		const gameDefinition = find(this.gameDefinitions, matches({ gameId }));
 		
 		launcher.message = "";
 		if (!gameId) {
@@ -95,7 +95,10 @@ class CompilerLauncherController {
 		const stopTasks = [stopTask('before-compile'), () => proc.kill(), stopTask('after-compile')];
 		const worker = new TaskWorker(startTasks, stopTasks);
 
-		proc.on('data', chunk => console.log(chunk.toString('ascii')));
+		const output = find(this.store.output.items, matches({ parent: parent }));
+		output.buffer = [];
+
+		proc.on('data', chunk => output.buffer.push(chunk.toString('ascii')));
 		proc.on('error', error => launcher.message = error);
 
 		this._wokerStarts(launcher, worker);
@@ -124,9 +127,6 @@ class CompilerLauncherController {
 		const { items } = this.store.launchers.compiler;
 		const tasks = filter(items, matches(pairs));
 		await Promise.all(tasks.map(async (task) => await this.stop(task.id)));
-	}
-	getGameDefinitions() {
-		return this.fileSystem.jsonSync(`${process.cwd()}/data/game-definitions.json`, true);
 	}
 	addUserLaunchers(userLaunchers) {
 		if (!userLaunchers) return;

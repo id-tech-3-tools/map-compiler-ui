@@ -14,16 +14,12 @@
 						Auto
 					</VueSwitch>
 				</span>
-				<VueButton 
-					v-if="isIdle" 
-					@click="start"  
-					class="primary" 
-					:disabled="isDisabled" 
-					v-tooltip="`Start map compilation and run launchers`"
-				>
+				<VueButton v-if="isIdle" @click="start" class="primary" :disabled="isDisabled" v-tooltip="`Start map compilation and run launchers`">
 					Compile
 				</VueButton>
-				<VueButton v-else @click="stop">Stop</VueButton>
+				<VueButton v-else @click="stop" class="danger">
+					<VueLoadingIndicator class="inline small indicator-color"/> &nbsp; Cancel	
+				</VueButton>
 			</div>
 		</div>
 	</div>
@@ -156,3 +152,11 @@
 		grid-gap: 10px;
 	}
 </style>
+
+<style>
+	.indicator-color > .animation {
+		border-right-color: white !important;
+		border-bottom-color: white !important;
+	}
+</style>
+
