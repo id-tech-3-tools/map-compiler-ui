@@ -3,7 +3,9 @@
 		<div v-if="project" class="columns">
 			<div>
 				<div class="sidebar">
-					<router-link to="/">Project List</router-link>
+					<div class="backBtn">
+						<router-link to="/"><VueIcon icon="keyboard_backspace" class="medium"/>Project List</router-link>
+					</div>
 					<project-settings></project-settings>
 					<launchers></launchers>
 					<tasks></tasks>
@@ -51,21 +53,24 @@
 <style scoped>
 	.columns {
 		display: grid;
-		grid-template-columns: 300px auto;
+		grid-template-columns: 400px auto;
 		grid-auto-rows: minmax(100px, 100vh);
 	}
 	.sidebar {
-		padding: 5px;
+		padding: 10px;
 		height: 100%;
 		overflow: auto;
-		background: #eee;
+		/* background: #eee; */
 		box-sizing: border-box;
 	}
 	.main {
-		padding: 5px;
+		padding: 10px;
 		height: 100%;
 		overflow: auto;
 		box-sizing: border-box;
+	}
+	.backBtn {
+		margin: 20px 0;
 	}
 </style>
 

@@ -1,15 +1,50 @@
 <template>
 	<div>
-		<select v-model="presets.selected">
-			<option value="" disabled>Select preset</option>
-			<option v-for="preset in presets.items" :value="preset.value" :key="preset.value">{{ augmentName(preset) }}</option>
-		</select>
-		<button @click="add">+</button>
-		<button @click="reset" :disabled="isEmpty || isFrozen" title="Reset">R</button>
-		<button @click="save" :disabled="isEmpty || isFrozen" title="Save">S</button>
-		<button @click="copy" :disabled="isEmpty" title="Save As">C</button>
-		<button @click="edit" :disabled="isEmpty || isFrozen" title="Edit">E</button>
-		<button @click="remove" :disabled="isEmpty" title="Delet">X</button>
+		<div class="menu-panel">
+			<div class="menu-panel-list">
+				<VueSelect v-model="presets.selected" placeholder="Select preset" class="preset-selector" v-tooltip="`Select preset`">
+					<VueSelectButton v-for="preset in presets.items" :value="preset.value" :key="preset.value" :label="getLabel(preset)" />
+				</VueSelect>
+			</div>
+			<div class="menu-panel-ctrl">
+				<VueButton @click="add" class="icon-button" icon-left="note_add" v-tooltip="`Add preset`"/>
+				<VueButton 
+					@click="reset" 
+					class="icon-button" 
+					icon-left="undo" 
+					:disabled="isEmpty || isFrozen" 
+					v-tooltip="`Reset preset`"
+				/>
+				<VueButton 
+					@click="save" 
+					class="icon-button"
+					icon-left="save" 
+					:disabled="isEmpty || isFrozen" 
+					v-tooltip="`Save preset`"
+				/>
+				<VueButton 
+					@click="copy" 
+					class="icon-button"
+					icon-left="add_to_photos" 
+					:disabled="isEmpty" 
+					v-tooltip="`Copy preset`"
+				/>
+				<VueButton 
+					@click="edit" 
+					class="icon-button"
+					icon-left="edit"
+					:disabled="isEmpty || isFrozen" 
+					v-tooltip="`Edit preset`"
+				/>
+				<VueButton 
+					@click="remove" 
+					class="icon-button danger"
+					icon-left="clear"
+					:disabled="isEmpty || isFrozen"
+					v-tooltip="`Delete preset`"
+				/>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -40,7 +75,7 @@
 			},
 		},
 		methods: {
-			augmentName(preset) {
+			getLabel(preset) {
 				return (preset.temp ? "temp: " : "" ) + `${preset.label}` + (preset.modified ? " *" : "");
 			},
 			add() {
@@ -65,3 +100,22 @@
 	}
 </script>
 
+<style scoped>
+	.preset-selector {
+		min-width: 300px;
+	}
+	.menu-panel {
+		max-width: 600px;
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-gap: 10px;
+	}
+	.menu-panel-list > * {
+		width: 100%;
+	}
+	.menu-panel-ctrl {
+		display: grid;
+		grid-template-columns: repeat(6, 32px);
+		grid-gap: 10px;
+	}
+</style>

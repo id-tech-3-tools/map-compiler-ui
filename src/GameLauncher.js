@@ -11,7 +11,12 @@ class GameLauncher {
 		this.enabled = false;
 		this.devmap = true;
 		this.arguments = { enabled: false, value: "" };
-		this.options = {}; // additonal fields from game defintion file
+		// additonal fields from game defintion file
+		this.options = {
+			enabled: true,
+			items: {}
+		};
+
 	}
 }
 

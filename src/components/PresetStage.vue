@@ -1,11 +1,12 @@
 <template>
-	<div>
-		<h3>
-			<label>
-				<input type="checkbox" v-model="stage.enabled" :disabled="frozen">
-				<button @click="start" :disabled="!isIdle || frozen">Start</button> {{ name }}
-			</label>
-		</h3>
+	<div class="preset-stage">
+		<h4>
+			<VueSwitch v-model="stage.enabled" :disabled="frozen" v-tooltip="`Toggle ${name} stage`"/>&nbsp;
+			<VueButton @click="start" :disabled="!isIdle || frozen" v-tooltip="`Start ${name} stage only`">
+				Start
+			</VueButton>&nbsp; 
+			{{ name | capitalize }}
+		</h4>
 		<div>
 			<slot></slot>
 		</div>
@@ -44,7 +45,20 @@
 			start() {
 				this.api.post('/launchers/master/start', { id: this.launcher.id, stage: this.name });
 			}
+		},
+		filters: {
+			capitalize(value) {
+				return value[0].toUpperCase() + value.slice(1);
+			}
 		}
 	}
 </script>
 
+<style scoped>
+	.preset-stage {
+		border-radius: 3px;
+		margin-bottom: 20px;
+		background: #23303c;
+		padding: 10px;
+	}
+</style>

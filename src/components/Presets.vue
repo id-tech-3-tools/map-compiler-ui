@@ -1,7 +1,7 @@
 <template>
-	<div>
-		<h2>Presets</h2>
-		<div>
+	<div class="preset-panel">
+		<h4>Presets</h4>
+		<div class="preset-manager-panel">
 			<preset-manager></preset-manager>
 		</div>
 		<div>
@@ -18,4 +18,13 @@
 		components: { PresetManager, PresetStages }
 	}
 </script>
+
+<style scoped>
+	.preset-panel {
+		margin-bottom: 20px;
+	}
+	.preset-manager-panel {
+		margin-bottom: 20px;
+	}
+</style>
 

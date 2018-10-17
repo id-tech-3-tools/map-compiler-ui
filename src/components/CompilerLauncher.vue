@@ -1,26 +1,37 @@
 <template>
 	<div>
-		<h3>
-			<span v-if="isIdle">
-				<button @click="start" :disabled="isDisabled">Start</button>
-			</span>
-			<span v-else>
-				<button @click="stop">Stop</button>
-			</span>
-			Compiler Launcher
-		</h3>
+		<h4>Compiler Launcher</h4>
+		<div class="launcher-header">
+			<div>
+				<span v-if="isIdle">
+					<VueButton 
+						@click="start" 
+						icon-left="play_arrow" 
+						:disabled="isDisabled" 
+						v-tooltip="`Start compiler`"
+					>Start</VueButton>
+				</span>
+				<span v-else>
+					<VueButton @click="stop" class="danger" icon-left="stop">Stop</VueButton>
+				</span>
+			</div>
+			<div>
+				<span class="launcher-ctrl"><VueIcon icon="build" class="medium"/></span>
+			</div>
+		</div>
 		<div>
 			<executable-list :executables="executables" v-bind.sync="launcher"></executable-list>
 		</div>
 		<div>
-			<input v-model="launcher.threads.enabled" type="checkbox"> Threads:
-			<select v-model="launcher.threads.value">
-				<option value="-1">Auto</option>
-				<option v-for="(thread, i) of threads" :key="i" :value="thread.value">{{ thread.label }}</option>
-			</select>
+			<VueSwitch v-model="launcher.threads.enabled"/>
+			&nbsp; 
+			<VueSelect v-model="launcher.threads.value" v-tooltip="`Number of threads`" placeholder="Threads" class="threadsSelector">
+				<VueSelectButton value="-1" label="Auto"/>
+				<VueSelectButton v-for="(thread, i) of threads" :key="i" :value="thread.value" :label="thread.label"/>
+			</VueSelect>
 		</div>
 		<div>
-			<p class="error">{{ launcher.message }}</p>
+			<p class="message-text">{{ launcher.message }}</p>
 		</div>
 	</div>
 </template>
@@ -74,7 +85,7 @@
 					let list = [];
 					let info = await this.api.get('/os/info');
 					for (let i = 1; i <= info.threads; i++) {
-						list.push({ value: i, label: i });
+						list.push({ value: i, label: `${i} thread` + `${i > 1 ? "s" : ""}` });
 					}
 					return list;
 				},
@@ -115,7 +126,23 @@
 </script>
 
 <style scoped>
-	.error {
-		color: red;
+	.threadsSelector {
+		min-width: 120px;
+	}
+	.launcher-header {
+		border-radius: 3px;
+		margin-bottom: 20px;
+		background: #23303c;
+		padding: 5px 5px;
+		display: grid;
+		grid-template-columns: auto 30px;
+		grid-gap: 10px;
+	}
+	.launcher-ctrl {
+		line-height: 25px;
+	}
+	.message-text {
+		font-size: 14px;
+		color: #e83030;
 	}
 </style>

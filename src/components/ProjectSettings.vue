@@ -1,26 +1,32 @@
 <template>
-	<div>
-		<h3>Project Settings</h3>
-		<div>id: {{projectId}}</div>
-		<div>
-			<input type="text" v-model.lazy="project.name">
+	<div class="project-settings-panel">
+		<h4><VueIcon icon="settings" class="big"/> Project Settings</h4>
+		<div class="input-entry">
+			<div class="settings-name-game">
+				<VueInput v-model.lazy="project.name" v-tooltip="`Project name`" placeholder="Project name" class="project-name"/>
+				<VueSelect v-model="project.game" v-tooltip="`Project game`" placeholder="Select Game" class="game-selector">
+					<VueSelectButton v-for="game of games" :value="game.value" :key="game.value" :label="game.label"/>
+				</VueSelect>
+			</div>
 		</div>
-		<div>
-			Game: 
-			<select v-model="project.game">
-				<option value="">Select Game</option>
-				<option v-for="game of games" :value="game.value" :key="game.value">{{ game.label }}</option>
-			</select>
+		<div class="input-entry">
+			<folder-dialog v-model="project.path" title="Select game directory">Game Directory</folder-dialog>
 		</div>
-		<div>
-			<folder-dialog v-model="project.path">Game Directory</folder-dialog>
-		</div>
-		<div>
-			<input v-model="project.mod.enabled" type="checkbox">
-			<label>
-				Game Mod:
-				<base-auto-text-field v-model="project.mod.value" :items="modlist"/>
-			</label>
+		<div class="input-entry">
+			<div class="settings-switch-mod">
+				<span class="project-ctrl">
+					<VueSwitch v-model="project.mod.enabled" v-tooltip="`Game mod`"></VueSwitch>
+				</span>
+				<VueTypeAhead
+					v-model="project.mod.value"
+					:suggestions="modlist"
+					placeholder="Select game mod"
+					v-tooltip="`Game mod`"
+					show-all
+					show-max="100"
+					restrict-choice
+				/>
+			</div>
 		</div>
 	</div>
 </template>
@@ -68,4 +74,34 @@
 		components: { FolderDialog, BaseAutoTextField }
 	}
 </script>
+
+<style scoped>
+	.project-settings-panel {
+		border-bottom: 1px solid rgb(22, 31, 36);
+		margin-bottom: 20px;
+		padding-bottom: 10px;
+	}
+	.input-entry {
+		margin-bottom: 10px;
+	}
+	.project-name {
+		min-width: 200px;
+	}
+	.game-selector {
+		min-width: 120px;
+	}
+	.settings-name-game {
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-gap: 10px;
+	}
+	.settings-switch-mod {
+		display: grid;
+		grid-template-columns: 40px auto;
+		grid-gap: 10px;
+	}
+	.project-ctrl {
+		line-height: 28px;
+	}
+</style>
 

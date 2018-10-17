@@ -1,16 +1,31 @@
 <template>
-	<div>
-		<h3>Compiler</h3>
-		<select v-model="project.map">
-			<option value="" disabled>Select Map</option>
-			<option v-for="map of maplist" :key="map.value" :value="map.value">{{map.label}}</option>
-		</select>
-		<button @click="updateMapList">Update</button>
-		<label>
-			<input type="checkbox" v-model="launcher.auto" :disabled="isDisabled" title="Auto start compile on map change">Auto
-		</label>
-		<button v-if="isIdle" @click="start" :disabled="isDisabled" title="Compile stages and run launchers">Compile</button>
-		<button v-else @click="stop">Stop</button>
+	<div class="compiler-panel">
+		<h4>Compiler</h4>
+		<div class="compiler-ctrl-panel">
+			<div class="compiler-map-selector">
+				<VueSelect v-model="project.map" placeholder="Select map" class="map-selector" v-tooltip="`Select map`">
+					<VueSelectButton v-for="map of maplist" :key="map.value" :value="map.value" :label="map.label"/>
+				</VueSelect>
+			</div>
+			<div class="compiler-ctrl">
+				<VueButton @click="updateMapList" v-tooltip="`Update map list`">Update</VueButton>
+				<span class="auto-toggle">
+					<VueSwitch v-model="launcher.auto" :disabled="isDisabled" v-tooltip="`Auto start compile on map change`">
+						Auto
+					</VueSwitch>
+				</span>
+				<VueButton 
+					v-if="isIdle" 
+					@click="start"  
+					class="primary" 
+					:disabled="isDisabled" 
+					v-tooltip="`Start map compilation and run launchers`"
+				>
+					Compile
+				</VueButton>
+				<VueButton v-else @click="stop">Stop</VueButton>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -116,3 +131,28 @@
 	}
 </script>
 
+<style scoped>
+	.compiler-panel {
+		margin: 20px 0;
+	}
+	.map-selector {
+		min-width: 300px;
+	}
+	.compiler-ctrl-panel {
+		max-width: 600px;
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-gap: 10px;
+	}
+	.compiler-map-selector > * {
+		width: 100%;
+	}
+	.auto-toggle {
+		line-height: 26px;
+	}
+	.compiler-ctrl {
+		display: grid;
+		grid-template-columns: auto auto auto;
+		grid-gap: 10px;
+	}
+</style>

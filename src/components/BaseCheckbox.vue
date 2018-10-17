@@ -1,6 +1,8 @@
 <template>
-	<label :title="title">
-		<input type="checkbox" v-model="binded"><slot></slot>
+	<label v-tooltip="title">
+		<VueSwitch v-model="binded"/>
+		&nbsp;
+		<slot></slot>
 	</label>
 </template>
 

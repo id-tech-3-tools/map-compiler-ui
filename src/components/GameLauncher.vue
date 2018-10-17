@@ -1,47 +1,59 @@
 <template>
 	<div>
-		<h3>
-			<label>
-				<input v-model="launcher.enabled" type="checkbox" :title="toggleTitle">
+		<h4>Game Launcher</h4>
+		<div class="launcher-header">
+			<div>
+				<span class="launcher-ctrl"><VueSwitch v-model="launcher.enabled" v-tooltip="toggleTitle"/></span>
+			</div>
+			<div>
 				<span v-if="isIdle">
-					<button @click="start" :disabled="isDisabled">Start</button>
+					<VueButton 
+						@click="start" 
+						icon-left="play_arrow" 
+						:disabled="isDisabled"
+						v-tooltip="`Start game engine`"
+					>Start</VueButton>
 				</span>
 				<span v-else>
-					<button @click="stop">Stop</button>
-					<button @click="restart">Restart</button>
+					<VueButton @click="stop" class="button-col danger" icon-left="stop">Stop</VueButton>
+					<VueButton @click="restart" icon-left="replay">Restart</VueButton>
 				</span>
-				Game Launcher
-			</label>
-		</h3>
+			</div>
+			<div>
+				<span class="launcher-ctrl"><VueIcon icon="build" class="medium"/></span>
+			</div>		
+		</div>
 		<div>
 			<executable-list :executables="executables" v-bind.sync="launcher"></executable-list>
 		</div>
-		<div>
-			<label title="Enable devmap mode">
-				<input v-model="launcher.devmap" type="checkbox"> Devmap
+		<div class="setting">
+			<label v-tooltip="`Enable devmap mode`">
+				<VueSwitch v-model="launcher.devmap"/> &nbsp; Devmap
 			</label>
 		</div>
-		<div>
-			<div v-for="option in options" :key="option.name">
-				<div v-if="option.type == 'toggle'">
-					<base-checkbox :title="option.title" :value="option.values" v-model="launcher.options[option.name].value">{{option.label}}</base-checkbox>
-				</div>
-				<div v-if="option.type == 'number'">
-					<input v-model="launcher.options[option.name].enabled" type="checkbox">
-					<label :title="option.title">{{ option.label }}
-						<input v-model="launcher.options[option.name].value" type="number" class="numberWidth">
-					</label>	
-				</div>
+		<div class="game-options-panel">
+			<VueSwitch v-model="launcher.options.enabled"/> &nbsp;
+			<VueDropdown label="Game options" icon-left="settings" icon-right="keyboard_arrow_down" :disabled="!hasValidProject">
+				<option-item 
+					v-for="option in options" 
+					:key="option.name" 
+					:definition="option" 
+					:option="launcher.options.items[option.name]"
+				/>
+			</VueDropdown>
+		</div>
+		<div class="setting arguments-panel">
+			<div>
+				<span class="arguments-ctrl"><VueSwitch v-model="launcher.arguments.enabled"/></span>
 			</div>
+			<VueInput 
+				v-model.lazy="launcher.arguments.value" 
+				v-tooltip="`You can use $map or $mapPath keywords to inject map name and absolute map path respectively`"
+				placeholder="Arguments"
+			/>
 		</div>
 		<div>
-			<input v-model="launcher.arguments.enabled" type="checkbox">
-			<label title="You can use $map or $mapPath keywords to inject map name and absolute map path respectively">
-				Arguments: <input v-model.lazy="launcher.arguments.value" type="text">
-			</label>
-		</div>
-		<div>
-			<p class="error">{{ launcher.message }}</p>
+			<p class="message-text">{{ launcher.message }}</p>
 		</div>
 	</div>
 </template>
@@ -53,7 +65,7 @@
 	import { clone } from 'lodash/lang'
 	import { matches } from "lodash/util"
 	import { mapField } from "@/libs/vuex-field-mapper.js"
-	import BaseCheckbox from "@/components/BaseCheckbox"
+	import OptionItem from "@/components/OptionItem"
 
 	export default {
 		inject: ['api'],
@@ -115,14 +127,14 @@
 				// copy options in launcher if neeeded
 				let options = {};
 				for (let option of engineOptions) {
-					if (this.launcher.options[option.name]) {
-						options[option.name] = clone(this.launcher.options[option.name]);
+					if (this.launcher.options.items[option.name]) {
+						options[option.name] = clone(this.launcher.options.items[option.name]);
 					}
 					else {
 						options[option.name] = { enabled: option.enabled, value: option.default };
 					}
 				}
-				this.launcher.options = options;
+				this.launcher.options.items = options;
 				return engineOptions;
 			},
 			hasValidProject() {
@@ -144,16 +156,46 @@
 				this.$emit('restart', this.launcher.id);
 			}
 		},
-		components: { ExecutableList, BaseCheckbox }
+		components: { ExecutableList, OptionItem }
 	}
 </script>
 
 <style scoped>
-	/* temp */
-	.numberWidth {
-		width: 80px;
+	.setting {
+		height: 40px;
 	}
-	.error {
-		color: red;
+	.number-field {
+		min-width: 80px;
+	}
+	.button-col {
+		margin-right: 10px;
+	}
+	.launcher-header {
+		border-radius: 3px;
+		margin-bottom: 20px;
+		background: #23303c;
+		padding: 5px 5px;
+		display: grid;
+		grid-template-columns: 36px auto 30px;
+		grid-gap: 10px;
+	}
+	.launcher-ctrl {
+		line-height: 25px;
+	}
+	.arguments-panel {
+		display: grid;
+		grid-template-columns: 36px auto;
+		grid-gap: 10px;
+	}
+	.arguments-ctrl {
+		line-height: 28px;
+	}
+	.game-options-panel {
+		height: 50px;
+	}
+	.message-text {
+		font-size: 14px;
+		color: #e83030;
 	}
 </style>
+

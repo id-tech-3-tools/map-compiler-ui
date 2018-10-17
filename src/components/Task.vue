@@ -1,39 +1,48 @@
 <template>
-	<div>
+	<div class="task-panel">
 		<div>
-			<div>
-				<input v-model="task.enabled" type="checkbox" :title="toggleTitle">
-				<button v-if="isIdle" @click="start" :disabled="isDisabled">Start</button>
-				<button v-else @click="stop">Stop</button>
-				<select v-model="task.event">
-					<option value="" disabled>Select Event</option>
-					<option v-for="(event, i) in events" :value="event.value" :key="i">{{event.label}}</option>
-				</select>
-				<button @click="remove">Remove</button>
+			<div class="task-header">
+				<div>
+					<span class="task-ctrl"><VueSwitch v-model="task.enabled" type="checkbox" v-tooltip="toggleTitle"/></span>
+				</div>
+				<div>
+					<VueButton v-if="isIdle" @click="start" class="width100" :disabled="isDisabled">Start</VueButton>
+					<VueButton v-else class="width100 danger" @click="stop">Stop</VueButton>
+				</div>
+				<div>
+					<VueSelect v-model="task.event" class="event-list width100" placeholder="Select Event" button-class="flat">
+						<VueSelectButton v-for="(event, i) of events" :key="i" :value="event.value" :label="event.label"/>
+					</VueSelect>
+				</div>
+				<div>
+					<VueButton @click="remove" class="icon-button danger" icon-left="clear"></VueButton>
+				</div>
 			</div>
-			<div>
+			<div class="setting">
 				<file-dialog v-model="task.path">Executable</file-dialog>
 			</div>
-			<div>
-				<input v-model="task.workDir.enabled" type="checkbox">
-				<folder-dialog v-model="task.workDir.value">Work Dir</folder-dialog>
+			<div class="setting">
+				<VueSwitch v-model="task.workDir.enabled"/>
+				&nbsp;
+				<folder-dialog v-model="task.workDir.value">Directory</folder-dialog>
+			</div>
+			<div class="setting">
+				<VueSwitch v-model="task.sync"/> &nbsp; Syncronous
+			</div>
+			<div class="setting arguments-panel">
+				<div>
+					<span class="arguments-ctrl"><VueSwitch v-model="task.arguments.enabled"/></span>
+				</div>
+				<VueInput 
+					v-model.lazy="task.arguments.value" 
+					v-tooltip="`You can use $map or $mapPath keywords to inject map name and absolute map path respectively`"
+					placeholder="Arguments"
+				/>
 			</div>
 			<div>
-				<label>
-					<input v-model="task.sync" type="checkbox">Syncronous
-				</label>
-			</div>
-			<div>
-				<input v-model="task.arguments.enabled" type="checkbox">
-				<label title="You can use $map or $mapPath keywords to inject map name and absolute map path respectively">
-					Arguments: <input v-model.lazy="task.arguments.value" type="text">
-				</label>
-			</div>
-			<div>
-				<p class="error">{{ task.message }}</p>
+				<p class="message-text">{{ task.message }}</p>
 			</div>
 		</div>
-		<hr>
 	</div>
 </template>
 
@@ -83,7 +92,39 @@
 </script>
 
 <style scoped>
-	.error {
-		color: red;
+	.task-panel {
+		background: #23303c;
+		border-radius: 3px;
+		padding: 10px;
+	}
+	.setting {
+		height: 40px;
+	}
+	.width100 {
+		width: 100%;
+	}
+	.event-list {
+		min-width: 180px;
+	}
+	.task-ctrl {
+		line-height: 28px;
+	}
+	.task-header {
+		display: grid;
+		grid-template-columns: 36px auto auto 35px;
+		grid-gap: 10px;
+		margin-bottom: 20px;
+	}
+	.arguments-panel {
+		display: grid;
+		grid-template-columns: 36px auto;
+		grid-gap: 10px;
+	}
+	.arguments-ctrl {
+		line-height: 28px;
+	}
+	.message-text {
+		font-size: 14px;
+		color: #e83030;
 	}
 </style>

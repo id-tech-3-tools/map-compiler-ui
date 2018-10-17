@@ -1,9 +1,16 @@
 <template>
 	<div>
-		<input v-model="value" type="text">
-		<button @click="rename" :disabled="!validation.valid">Rename</button>
-		<button @click="cancel">Cancel</button>
-		<p v-show="!validation.valid">{{ validation.message }}</p>
+		<VueInput v-model="value" class="input-field"/>
+		&nbsp;
+		<VueButton @click="rename" icon-left="edit" class="button-col" :disabled="!validation.valid">Rename</VueButton>
+		<VueButton @click="cancel">Cancel</VueButton>
+		<div class="message-panel">
+			<span v-show="!validation.valid" class="message-text">
+				<VueIcon icon="warning" />
+				&nbsp;
+				{{ validation.message }}
+			</span>
+		</div>
 	</div>
 </template>
 
@@ -49,3 +56,20 @@
 		}
 	}
 </script>
+
+<style scoped>
+	.input-field {
+		min-width: 300px;
+	}
+	.button-col {
+		margin-right: 10px;
+	}
+	.message-panel {
+		margin: 10px 0;
+		min-height: 25px;
+	}
+	.message-text {
+		font-size: 14px;
+		color: #e83030;
+	}
+</style>

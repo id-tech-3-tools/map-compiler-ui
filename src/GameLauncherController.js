@@ -77,14 +77,20 @@ class GameLauncherController {
 			return;
 		}
 
-		const additionalOptions = each(toPairs(pickBy(launcher.options, matches({enabled: true}))), pair => (pair.unshift('+set'), pair[2] = pair[2].value))
+		let additionalOptions = [];
+		if (launcher.options.enabled) {
+			additionalOptions = each(
+				toPairs(pickBy(launcher.options.items,matches({ enabled: true }))),
+				pair => (pair.unshift('+set'), pair[2] = pair[2].value)
+			);
+		}
 
 		const args = new ArgumentStore();
-		const envVars = { map: Path.basename(project.map, '.map') };
-		const mapStartCommand = replaceString(launcher.devmap ? engineCommands.startDevmap : engineCommands.startMap, envVars);
+		const env = { map: Path.basename(project.map, '.map'), mapPath: project.map };
+		const mapStartCommand = replaceString(launcher.devmap ? engineCommands.startDevmap : engineCommands.startMap, env);
 		args.append(`+set fs_game ${mod}`);
 		args.append(...flatten(additionalOptions));
-		args.append(launcher.arguments.enabled ? replaceString(launcher.arguments.value, envVars) : "");
+		args.append(launcher.arguments.enabled ? replaceString(launcher.arguments.value, env) : "");
 		args.append(mapStartCommand);
 
 		const proc = new GameRunner(Path.resolve(path), { cwd: project.path, rcon, args: args.toArray() });

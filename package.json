@@ -11,6 +11,7 @@
     "serve:electron": "vue-cli-service serve:electron"
   },
   "dependencies": {
+    "@vue/ui": "^0.5.6",
     "lodash": "^4.17.11",
     "vue": "^2.5.17",
     "vue-async-computed": "^3.4.1",
