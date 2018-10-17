@@ -5,7 +5,9 @@ import router from "./router";
 import store from "./store";
 import { mapField, mapFieldWithStore } from './libs/vuex-field-mapper'
 import AsyncComputed from 'vue-async-computed'
+import VueUi from '@vue/ui'
 
+Vue.use(VueUi)
 Vue.use(AsyncComputed)
 Vue.config.productionTip = false;
 

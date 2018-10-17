@@ -1,9 +1,8 @@
 <template>
 	<span class="wrapper">
-		<div class="first">
-			<button @click="openFile"><slot></slot></button>
-		</div>
-		<div class="last" :title="value">{{ value | basename }}</div>
+		<VueButton @click="openFile" v-tooltip="title"><slot></slot></VueButton>
+		&nbsp;
+		<span class="path" v-tooltip="value">{{ value | basename }}</span>
 	</span>
 </template>
 
@@ -39,20 +38,9 @@ export default {
 </script>
 
 <style scoped>
-	.wrapper{
-		display: inline-flex;
-		flex-flow:row nowrap;
-		max-width:100%; /* or width:100% if you want the spans to take all available space */
-	}
-	.first {
-		flex:1;
-		white-space:nowrap;
-	}
-	.last {
-		/* direction:rtl; */
-		/* white-space:pre; */
-		/* overflow: hidden; */
-		/* text-overflow: ellipsis; */
+	.path {
+		text-overflow: ellipsis;
+		font-size: 14px;
 	}
 </style>
 

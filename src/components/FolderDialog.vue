@@ -1,7 +1,8 @@
 <template>
 	<span>
-		<button @click="openFolder"><slot></slot></button>
-		<span class="path">{{ value }}</span>
+		<VueButton @click="openFolder" v-tooltip="title"><slot></slot></VueButton>
+		&nbsp;
+		<span class="path" v-tooltip="value">{{ value }}</span>
 	</span>
 </template>
 
@@ -32,5 +33,6 @@ export default {
 <style scoped>
 	.path {
 		text-overflow: ellipsis;
+		font-size: 14px;
 	}
 </style>

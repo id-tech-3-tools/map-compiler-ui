@@ -1,11 +1,12 @@
 <template>
 	<div>
 		<h3>
-			<label><input v-model="enabled" type="checkbox" :title="toggleTitle">Tasks</label> 
-			<button @click="addTask">add</button>
+			<VueSwitch v-model="enabled" v-tooltip="toggleTitle"/>
+			&nbsp; Tasks &nbsp;
+			<VueButton @click="addTask" class="icon-button" icon-left="note_add" v-tooltip="`Add new task`"/>
 		</h3>
 		<div>
-			<div v-for="task of tasks" :key="task.id">
+			<div v-for="task of tasks" :key="task.id" class="task-wrapper">
 				<task :task="task" @start="startTask" @stop="stopTask" @remove="removeTask"/>
 			</div>
 		</div>
@@ -22,7 +23,7 @@
 		inject: ['api'],
 		computed: {
 			toggleTitle() {
-				return "Allow tasks to react on events";
+				return "Disable all tasks";
 			},
 			...mapField({
 				tasks(state) {
@@ -56,3 +57,8 @@
 	}
 </script>
 
+<style scoped>
+	.task-wrapper {
+		margin-bottom: 5px;
+	}
+</style>

@@ -1,6 +1,38 @@
 <template>
 	<div>
-		<component :is="panel" :presets="presets" @action="action"></component>
+		<div>
+			<component :is="panel" :presets="presets" @action="action"></component>
+		</div>
+		<div>
+			<VueModal v-if="resetModal.show" class="small" @close="resetModal.show = false">
+				<template slot="header">
+					<VueIcon icon="warning" class="title big"/> &nbsp; Warning!
+				</template>
+				<div class="default-body">
+					Are you sure you want to reset the preset to last saved state?<br>
+					This will affect other projects too.
+				</div>
+				<div slot="footer" class="actions">
+					<VueButton class="primary" @click="resetPreset">Confirm</VueButton>
+					<VueButton class="primary danger" @click="resetModal.show = false">Cancel</VueButton>
+				</div>
+			</VueModal>
+		</div>
+		<div>
+			<VueModal v-if="removeModal.show" class="small" @close="removeModal.show = false">
+				<template slot="header">
+					<VueIcon icon="warning" class="title big"/> &nbsp; Warning!
+				</template>
+				<div class="default-body">
+					Are you sure you want to delete this preset?<br>
+					However, it won't affect other depending projects, since these are always fallback to backup preset.
+				</div>
+				<div slot="footer" class="actions">
+					<VueButton class="primary" @click="removePreset">Confirm</VueButton>
+					<VueButton class="primary danger" @click="removeModal.show = false">Cancel</VueButton>
+				</div>
+			</VueModal>
+		</div>
 	</div>
 </template>
 
@@ -18,7 +50,9 @@
 		inject: ['api'],
 		data() {
 			return { 
-				panel: "preset-menu"
+				panel: "preset-menu",
+				resetModal: { show: false, id: null },
+				removeModal: { show: false, id: null },
 			}
 		},
 		watch: {
@@ -75,10 +109,8 @@
 						this.panel = "preset-menu";
 						break;
 					case "remove": {
-						const yes = confirm("Are you sure you want to delete this preset?\nHowever, it won't affect other depending projects, since these will always fallback to backup preset.");
-						if (yes) {
-							this.api.post('/presets/remove', { id: props.value });
-						}
+						this.removeModal.show = true;
+						this.removeModal.id = props.value;
 						break;
 					}
 					case "cancel":
@@ -88,10 +120,8 @@
 						this.panel = "preset-creator";
 						break;
 					case "reset": {
-						const yes = confirm("Are you sure you want to reset the preset to last saved state?\nThis will affect other projects too.");
-						if (yes) {
-							this.api.post('/presets/reset', { id: props.value });
-						}
+						this.resetModal.show = true;
+						this.resetModal.id = props.value;
 						break;
 					}
 					case "save":
@@ -111,6 +141,20 @@
 						this.api.post('/presets/rename', { id: props.value, name: props.name });
 						this.panel = "preset-menu";
 						break;
+				}
+			},
+			resetPreset() {
+				this.resetModal.show = false;
+				if (this.resetModal.id) {
+					this.api.post('/presets/reset', { id: this.resetModal.id });
+					this.resetModal.id = null;
+				}
+			},
+			removePreset() {
+				this.removeModal.show = false;
+				if (this.removeModal.id) {
+					this.api.post('/presets/remove', { id: this.removeModal.id });
+					this.removeModal.id = null;
 				}
 			}
 		},

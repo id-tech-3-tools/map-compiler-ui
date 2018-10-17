@@ -1,12 +1,12 @@
 <template>
 	<div>
-		<div>
+		<div class="launcher-panel">
 			<compiler-launcher :launcher="launchers.compiler" @start="compilerStart" @stop="compilerStop"/>
 		</div>
-		<div>
+		<div class="launcher-panel">
 			<bspc-launcher :launcher="launchers.bspc" @start="bspcStart" @stop="bspcStop"/>
 		</div>
-		<div>
+		<div class="launcher-panel">
 			<game-launcher :launcher="launchers.game" @start="gameStart" @stop="gameStop" @restart="gameRestart" />
 		</div>
 	</div>
@@ -60,4 +60,13 @@
 		components: { CompilerLauncher, BspcLauncher, GameLauncher }
 	}
 </script>
+
+<style scoped>
+	.launcher-panel {
+		border-bottom: 1px solid rgb(22, 31, 36);
+		margin-bottom: 20px;
+		padding-bottom: 10px;
+	}
+</style>
+
 

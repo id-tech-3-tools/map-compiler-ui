@@ -1,33 +1,50 @@
 <template>
 	<div>
-		<h3>
-			<label>
-				<input v-model="launcher.enabled" type="checkbox" :title="toggleTitle">
+		<h4>
+			BSPC Launcher
+		</h4>
+		<div class="launcher-header">
+			<div>
+				<span class="launcher-ctrl">
+					<VueSwitch v-model="launcher.enabled" v-tooltip="toggleTitle"/>
+				</span>	
+			</div>	
+			<div>
 				<span v-if="isIdle">
-					<button @click="start" :disabled="isDisabled">Start</button>
+					<VueButton 
+						@click="start" 
+						icon-left="play_arrow" 
+						:disabled="isDisabled"
+						v-tooltip="`Start BSPC`"
+					>Start</VueButton>
 				</span>
 				<span v-else>
-					<button @click="stop">Stop</button>
+					<VueButton @click="stop" class="danger" icon-left="stop">Stop</VueButton>
 				</span>
-				BSPC Launcher
-			</label>
-		</h3>
-		
+			</div>
+			<div>
+				<span class="launcher-ctrl"><VueIcon icon="build" class="medium"/></span>
+			</div>
+		</div>
 		<div>
 			<executable-list :executables="executables" v-bind.sync="launcher"></executable-list>
 		</div>
-		<div>
-			<input v-model="launcher.workDir.enabled" type="checkbox">
-			<folder-dialog v-model="launcher.workDir.value">Work Dir</folder-dialog>
+		<div class="setting">
+			<VueSwitch v-model="launcher.workDir.enabled"/>
+			&nbsp;
+			<folder-dialog v-model="launcher.workDir.value" title="Select working directory">Directory</folder-dialog>
+		</div>
+		<div class="setting">
+			<VueSwitch v-model="launcher.arguments.enabled"/>
+			&nbsp;
+			<VueInput 
+				v-model.lazy="launcher.arguments.value" 
+				v-tooltip="`You can use $map or $mapPath keywords to inject map name and absolute map path respectively`"
+				placeholder="Arguments"
+			/>
 		</div>
 		<div>
-			<input v-model="launcher.arguments.enabled" type="checkbox">
-			<label title="You can use $map or $mapPath keywords to inject map name and absolute map path respectively">
-				Arguments: <input v-model.lazy="launcher.arguments.value" type="text">
-			</label>
-		</div>
-		<div>
-			<p class="error">{{ launcher.message }}</p>
+			<p class="message-text">{{ launcher.message }}</p>
 		</div>
 	</div>
 </template>
@@ -79,7 +96,7 @@
 		},
 		computed: {
 			toggleTitle() {
-				return "Allow BSPC launcher to run after map compile";
+				return "Allow BSPC launcher to run after compiler";
 			},
 			isIdle() {
 				return this.launcher.state == "idle";
@@ -113,7 +130,26 @@
 </script>
 
 <style scoped>
-	.error {
-		color: red;
+	.setting {
+		height: 40px;
+	}
+	.button-col {
+		margin-right: 10px;
+	}
+	.launcher-header {
+		border-radius: 3px;
+		margin-bottom: 20px;
+		background: #23303c;
+		padding: 5px 5px;
+		display: grid;
+		grid-template-columns: 36px auto 30px;
+		grid-gap: 10px;
+	}
+	.launcher-ctrl {
+		line-height: 25px;
+	}
+	.message-text {
+		font-size: 14px;
+		color: #e83030;
 	}
 </style>

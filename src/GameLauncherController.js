@@ -77,10 +77,16 @@ class GameLauncherController {
 			return;
 		}
 
-		const additionalOptions = each(toPairs(pickBy(launcher.options, matches({enabled: true}))), pair => (pair.unshift('+set'), pair[2] = pair[2].value))
+		let additionalOptions = [];
+		if (launcher.options.enabled) {
+			additionalOptions = each(
+				toPairs(pickBy(launcher.options.items,matches({ enabled: true }))),
+				pair => (pair.unshift('+set'), pair[2] = pair[2].value)
+			);
+		}
 
 		const args = new ArgumentStore();
-		const envVars = { map: Path.basename(project.map, '.map') };
+		const env = { map: Path.basename(project.map, '.map'), mapPath: project.map };
 		const mapStartCommand = replaceString(launcher.devmap ? engineCommands.startDevmap : engineCommands.startMap, envVars);
 		args.append(`+set fs_game ${mod}`);
 		args.append(...flatten(additionalOptions));
