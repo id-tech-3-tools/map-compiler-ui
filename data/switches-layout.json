@@ -205,10 +205,6 @@
                     {
                         "name": "saveprt",
                         "description": "Disables the automatic deletion of the .prt portal file after VIS finishes."
-                    },
-                    {
-                        "name": "v",
-                        "description": "Enables verbose mode. Always use this."
                     }
                 ]
             }
@@ -265,10 +261,6 @@
                         "name": "compensate",
                         "description": "Lightmap compensate (darkening factor applied after everything else)\n<F>",
                         "type": "number"
-                    },
-                    {
-                        "name": "cpma",
-                        "description": "CPMA vertex lighting mode"
                     },
                     {
                         "name": "custinfoparms",
@@ -420,6 +412,10 @@
                         "description": "Disable grid light calculation (makes all entities fullbright)"
                     },
                     {
+                        "name": "nolightmap",
+                        "description": "Disables lightmap backing, forcing all faces to be vertex lit"
+                    },
+                    {
                         "name": "nolightmapsearch",
                         "description": "Do not optimize lightmap packing for GPU memory usage (as doing so costs fps)"
                     },
@@ -543,16 +539,12 @@
                         "type": "number"
                     },
                     {
-                        "name": "forceVertex",
-                        "description": "..."
+                        "name": "forcevertex",
+                        "description": "CPMA vertex lighting mode"
                     },
                     {
-                        "name": "noLightmap",
-                        "description": "..."
-                    },
-                    {
-                        "name": "extradist",
-                        "description": "...\n<F>",
+                        "name": "lightnudge",
+                        "description": "Moves light sources from each sample or point by N.N units\n<F>",
                         "type": "number"
                     }
                 ]
