@@ -1,7 +1,7 @@
 [
     {
-        "id": "preset_bsponly",
-        "name": "BSP Only",
+        "id": "preset_bsp-only",
+        "name": "bsp-only",
         "stages": {
             "bsp": {
                 "enabled": true,
@@ -23,8 +23,8 @@
         }
     },
     {
-        "id": "preset_visonly",
-        "name": "VIS Only",
+        "id": "preset_vis-only",
+        "name": "vis-only",
         "stages": {
             "bsp": {
                 "enabled": false,
@@ -46,8 +46,8 @@
         }
     },
     {
-        "id": "preset_lightonly",
-        "name": "Light Only",
+        "id": "preset_light-only",
+        "name": "light-only",
         "stages": {
             "bsp": {
                 "enabled": false,
@@ -60,7 +60,7 @@
             "light": {
                 "enabled": true,
                 "switches": {
-                    "fast ": {
+                    "fast": {
                         "enabled": true,
                         "value": ""
                     },
@@ -79,6 +79,598 @@
                     "patchshadows": {
                         "enabled": true,
                         "value": ""
+                    }
+                }
+            }
+        }
+    },
+     {
+        "id": "preset_vertex-light-only",
+        "name": "vertex-light-only",
+        "stages": {
+            "bsp": {
+                "enabled": false,
+                "switches": {}
+            },
+            "vis": {
+                "enabled": false,
+                "switches": {}
+            },
+            "light": {
+                "enabled": true,
+                "switches": {
+                    "fast": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "nolightmap": {
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": "preset_test-fast-vis-no-lights",
+        "name": "test-fast-vis-no-lights",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "meta": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {
+                    "fast": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "saveprt": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "light": {
+                "enabled": false,
+                "switches": {}
+            }
+        }
+    },
+    {
+        "id": "preset_test-fast-vis-vertex-lights",
+        "name": "test-fast-vis-vertex-lights",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "meta": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {
+                    "fast": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "saveprt": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "light": {
+                "enabled": true,
+                "switches": {
+                    "fast": {
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "nolightmap": {
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": "preset_test-no-lights",
+        "name": "test-no-lights",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "meta": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {
+                    "saveprt": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "light": {
+                "enabled": false,
+                "switches": {}
+            }
+        }
+    },
+    {
+        "id": "preset_test-full",
+        "name": "test-full",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "meta": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {
+                    "saveprt": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "light": {
+                "enabled": true,
+                "switches": {
+                    "fast": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "fastallocate": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "filter": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "shade": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "patchshadows": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": "preset_test-full-bounce-8",
+        "name": "test-full-bounce-8",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "meta": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {
+                    "saveprt": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "light": {
+                "enabled": true,
+                "switches": {
+                    "fast": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "fastallocate": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "filter": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "shade": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "patchshadows": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "bounce": {
+                        "enabled": true,
+                        "value": "8"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": "preset_final-low",
+        "name": "final-low",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "meta": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {
+                    "saveprt": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "light": {
+                "enabled": true,
+                "switches": {
+                    "fast": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "fastallocate": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "samples": { 
+                        "enabled": true,
+                        "value": "2"
+                    },
+                    "shade": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "patchshadows": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "lightmapsize": {
+                        "enabled": true,
+                        "value": "2048"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": "preset_final-low-bounce-8",
+        "name": "final-low-bounce-8",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "meta": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {
+                    "saveprt": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "light": {
+                "enabled": true,
+                "switches": {
+                    "fast": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "fastallocate": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "samples": { 
+                        "enabled": true,
+                        "value": "2"
+                    },
+                    "shade": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "patchshadows": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "lightmapsize": {
+                        "enabled": true,
+                        "value": "2048"
+                    },
+                    "bounce": {
+                        "enabled": true,
+                        "value": "8"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": "preset_final-medium",
+        "name": "final-medium",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "meta": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "samplesize": { 
+                        "enabled": true,
+                        "value": "8"
+                    }
+                }
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {
+                    "saveprt": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "light": {
+                "enabled": true,
+                "switches": {
+                    "fast": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "fastallocate": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "samples": { 
+                        "enabled": true,
+                        "value": "2"
+                    },
+                    "samplesize": { 
+                        "enabled": true,
+                        "value": "8"
+                    },
+                    "shade": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "patchshadows": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "lightmapsize": {
+                        "enabled": true,
+                        "value": "2048"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": "preset_final-medium-bounce-8",
+        "name": "final-medium-bounce-8",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "meta": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "samplesize": { 
+                        "enabled": true,
+                        "value": "8"
+                    }
+                }
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {
+                    "saveprt": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "light": {
+                "enabled": true,
+                "switches": {
+                    "fast": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "fastallocate": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "samples": { 
+                        "enabled": true,
+                        "value": "2"
+                    },
+                    "samplesize": { 
+                        "enabled": true,
+                        "value": "8"
+                    },
+                    "shade": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "patchshadows": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "lightmapsize": {
+                        "enabled": true,
+                        "value": "2048"
+                    },
+                    "bounce": { 
+                        "enabled": true,
+                        "value": "8"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": "preset_final-high",
+        "name": "final-final-high",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "meta": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "samplesize": { 
+                        "enabled": true,
+                        "value": "4"
+                    }
+                }
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {
+                    "saveprt": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "light": {
+                "enabled": true,
+                "switches": {
+                    "fast": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "fastallocate": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "samples": { 
+                        "enabled": true,
+                        "value": "3"
+                    },
+                    "samplesize": { 
+                        "enabled": true,
+                        "value": "4"
+                    },
+                    "shade": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "patchshadows": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "lightmapsize": {
+                        "enabled": true,
+                        "value": "2048"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": "preset_final-high-bounce-8",
+        "name": "final-high-bounce-8",
+        "stages": {
+            "bsp": {
+                "enabled": true,
+                "switches": {
+                    "meta": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "samplesize": { 
+                        "enabled": true,
+                        "value": "4"
+                    }
+                }
+            },
+            "vis": {
+                "enabled": true,
+                "switches": {
+                    "saveprt": { 
+                        "enabled": true,
+                        "value": ""
+                    }
+                }
+            },
+            "light": {
+                "enabled": true,
+                "switches": {
+                    "fast": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "fastallocate": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "samples": { 
+                        "enabled": true,
+                        "value": "3"
+                    },
+                    "samplesize": { 
+                        "enabled": true,
+                        "value": "4"
+                    },
+                    "shade": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "patchshadows": { 
+                        "enabled": true,
+                        "value": ""
+                    },
+                    "lightmapsize": {
+                        "enabled": true,
+                        "value": "2048"
+                    },
+                    "bounce": { 
+                        "enabled": true,
+                        "value": "8"
                     }
                 }
             }
