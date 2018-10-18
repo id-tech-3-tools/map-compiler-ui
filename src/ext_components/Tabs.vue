@@ -104,6 +104,7 @@ export default {
     // fixed: hide all tabs but the current one
     if (!this.$slots.default.length) return;
     for (let slot of this.$slots.default) {
+      if (!slot.componentInstance) continue;
       if (slot.componentInstance.id == this.currentTabId) continue;
       slot.elm.style.display = "none";
     } 

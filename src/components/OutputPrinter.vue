@@ -1,7 +1,7 @@
 <template>
 	<div class="output-panel">
 		<div class="output-ctrl">
-			Compiler output &nbsp; 
+			Console Output &nbsp; 
 			<VueButton class="icon-button" @click="copy" :disabled="!output.buffer.length" icon-left="assignment" v-tooltip="`Copy to clipboard`" />
 		</div>
 		<div class="output" ref="outputtext">
@@ -19,12 +19,15 @@
 	import { mapField } from "@/libs/vuex-field-mapper.js"
 
 	export default {
+		props: {
+			type: { type: String, default: "common" }
+		},
 		computed: {
 			projectId() {
 				return this.$route.params.id;
 			},
 			output () { 
-				return find(this.$store.state.output.items, matches({ parent: this.projectId }));
+				return find(this.$store.state.output.items, matches({ parent: this.projectId, type: this.type }));
 			}
 		},
 		updated() {

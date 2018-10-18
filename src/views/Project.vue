@@ -19,8 +19,11 @@
 							<VueTab id="tab-presets" label="Presets" icon="assignment_turned_in">
 								<div class="tab-content"><presets></presets></div>
 							</VueTab>
-							<VueTab id="tab-output" :label="outputLabel" icon="announcement">
-								<div class="tab-content"><output-printer></output-printer></div>
+							<VueTab id="tab-output-compiler" :label="outputCompilerLabel" icon="announcement">
+								<div class="tab-content"><output-printer type="compiler"></output-printer></div>
+							</VueTab>
+							<VueTab v-if="allowBspc" id="tab-output-bspc" :label="outputBspcLabel" icon="announcement">
+								<div class="tab-content"><output-printer type="bspc"></output-printer></div>
 							</VueTab>
 						</Tabs>
 					</div>
@@ -48,8 +51,12 @@
 	import { countFinds } from '@/utils'
 
 	export default {
+		inject: ['api'],
 		data() {
-			return { tabId: 'tab-presets' }
+			return { 
+				tabId: 'tab-presets', 
+				gameDefinitions: this.api.get('/fs/game-definitions')
+			}
 		},
 		computed: {
 			projectId() {
@@ -59,17 +66,36 @@
 				project (state) {
 					return find(state.projects.items, matches({ id: this.projectId }));
 				},
-				outputBuffer(state) {
-					const output = find(state.output.items, matches({ parent: this.projectId }));
+				outputCompilerBuffer(state) {
+					const output = find(state.output.items, matches({ parent: this.projectId, type: "compiler" }));
+					return output.buffer;
+				},
+				outputBspcBuffer(state) {
+					const output = find(state.output.items, matches({ parent: this.projectId, type: "bspc" }));
 					return output.buffer;
 				}
 			}),
-			outputLabel() {
+			outputCompilerLabel() {
+				const lines = this.calculateBufferLines(this.outputCompilerBuffer);
+				return "Compiler" + (lines > 0 ? ` (${lines})` : "");
+			},
+			outputBspcLabel() {
+				const lines = this.calculateBufferLines(this.outputBspcBuffer);
+				return "BSPC" + (lines > 0 ? ` (${lines})` : "");
+			},
+			allowBspc() {
+				const gameDefinition = find(this.gameDefinitions, matches({ gameId: this.project.game }));
+				if (!gameDefinition) return false;
+				return Boolean(gameDefinition.BSPC);
+			}
+		},
+		methods: {
+			calculateBufferLines(buffer) {
 				let lines = 0;
-				for (let buffer of this.outputBuffer) {
+				for (let buffer of buffer) {
 					lines += countFinds(buffer, '\n');
 				}
-				return "Output" + (lines > 0 ? ` (${lines})` : "");
+				return lines;
 			}
 		},
 		components: { ProjectSettings, Launchers, Tasks, Compiler, Presets, OutputPrinter, Tabs }

@@ -32,7 +32,17 @@
 		<div class="setting">
 			<VueSwitch v-model="launcher.workDir.enabled"/>
 			&nbsp;
-			<folder-dialog v-model="launcher.workDir.value" title="Select working directory">Directory</folder-dialog>
+			<folder-dialog v-model="launcher.workDir.value" title="Select working directory. BPSC executable will be added automatically, if directory contains one.">
+				Directory
+			</folder-dialog>
+		</div>
+		<div class="setting">
+			<VueSwitch v-model="launcher.threads.enabled"/>
+			&nbsp; 
+			<VueSelect v-model="launcher.threads.value" v-tooltip="`Number of threads`" placeholder="Threads" class="threadsSelector">
+				<VueSelectButton :value="-1" label="Auto"/>
+				<VueSelectButton v-for="(thread, i) of threads" :key="i" :value="thread.value" :label="thread.label"/>
+			</VueSelect>
 		</div>
 		<div class="setting">
 			<VueSwitch v-model="launcher.arguments.enabled"/>
@@ -88,6 +98,17 @@
 						if (!find(list, matches({ value: this.launcher.path }))) {
 							this.launcher.path = "";
 						}
+					}
+					return list;
+				},
+				default: []
+			},
+			threads: {
+				async get() {
+					let list = [];
+					let info = await this.api.get('/os/info');
+					for (let i = 1; i <= info.threads; i++) {
+						list.push({ value: i, label: `${i} thread` + `${i > 1 ? "s" : ""}` });
 					}
 					return list;
 				},
@@ -151,5 +172,8 @@
 	.message-text {
 		font-size: 14px;
 		color: #e83030;
+	}
+	.threadsSelector {
+		min-width: 120px;
 	}
 </style>

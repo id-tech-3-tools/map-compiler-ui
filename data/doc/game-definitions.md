@@ -128,8 +128,10 @@
 	],
 	// suggested compiler list (w/o extensions)
 	"compilers": ["mapcompiler", "q3map2"],
+	// allow bspc features for the game
+	"BSPC": true, 
 	// suggested bspc list (w/o extensions)
-	"compilers": ["bspc"],
+	"BSPCs": ["bspc"],
 	// for future references, could handle certain events and act accordingly (eg. include save/load routines on map restarts)
 	"script": ""
 }

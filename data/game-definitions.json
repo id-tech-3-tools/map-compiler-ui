@@ -74,6 +74,7 @@
             }
         ],
         "compilers": ["mapcompiler", "q3map2"],
+        "BSPC": true,
         "BSPCs": ["bspc"]
     },
     {
@@ -169,6 +170,7 @@
             }
         ],
         "compilers": ["mapcompiler", "q3map2"],
+        "BSPC": false,
         "BSPCs": ["bspc"]
     },
     {
@@ -246,6 +248,7 @@
             }
         ],
         "compilers": ["mapcompiler", "q3map2"],
+        "BSPC": true,
         "BSPCs": ["bspc"]
     },
     {
@@ -323,6 +326,7 @@
             }
         ],
         "compilers": ["mapcompiler", "q3map2"],
+        "BSPC": false,
         "BSPCs": ["bspc"]
     }
 ]

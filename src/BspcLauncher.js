@@ -11,6 +11,7 @@ class BspcLauncher {
 		this.message = "";
 		this.enabled = false;
 		this.arguments = { enabled: false, value: "" };
+		this.threads = { enabled: false, value: -1 };
 	}
 }
 

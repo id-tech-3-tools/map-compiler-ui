@@ -45,7 +45,7 @@ const gameDefinitions = fileSystem.jsonSync(`${cwd}/data/game-definitions.json`,
 const projectCtrl = new ProjectController(storeWrapper);
 const taskCtrl = new TaskController(storeWrapper);
 const compilerLauncherCtrl = new CompilerLauncherController(storeWrapper, taskCtrl, gameDefinitions);
-const bspcLauncherCtrl = new BspcLauncherController(storeWrapper, taskCtrl);
+const bspcLauncherCtrl = new BspcLauncherController(storeWrapper, taskCtrl, gameDefinitions);
 const gameLauncherCtrl = new GameLauncherController(storeWrapper, taskCtrl, gameDefinitions);
 const masterLauncherCtrl = new MasterLauncherController(storeWrapper, compilerLauncherCtrl, [bspcLauncherCtrl, gameLauncherCtrl]);
 const launchersCtrl = new LaunchersController([compilerLauncherCtrl, bspcLauncherCtrl, gameLauncherCtrl, masterLauncherCtrl]); // fix master order?
@@ -64,13 +64,16 @@ gameLauncherCtrl.addUserLaunchers(fileSystem.jsonSync(`${cwd}/data/user/user-gam
 masterLauncherCtrl.addUserLaunchers(fileSystem.jsonSync(`${cwd}/data/user/user-master-launchers.json`, true));
 taskCtrl.addUserTasks(fileSystem.jsonSync(`${cwd}/data/user/user-tasks.json`, true));
 
-outputCtrl.createMultiple(storeWrapper.projects.items.map(item => ({ parent: item.id })));
+// install buffers for all imported projects
+outputCtrl.createMultiple(storeWrapper.projects.items.map(item => ({ parent: item.id, type: "compiler" })));
+outputCtrl.createMultiple(storeWrapper.projects.items.map(item => ({ parent: item.id, type: "bspc" })));
 
 api.route('/projects/create', () => {
     console.log('⚡ creating new project!');
     const project = projectCtrl.create();
     launchersCtrl.create({ parent: project.id });
-    outputCtrl.create({ parent: project.id });
+    outputCtrl.create({ parent: project.id, type: "compiler" });
+    outputCtrl.create({ parent: project.id, type: "bspc" });
 });
 
 api.route('/projects/remove', async (payload) => {
