@@ -95,7 +95,7 @@ class CompilerLauncherController {
 		const stopTasks = [stopTask('before-compile'), () => proc.kill(), stopTask('after-compile')];
 		const worker = new TaskWorker(startTasks, stopTasks);
 
-		const output = find(this.store.output.items, matches({ parent: parent }));
+		const output = find(this.store.output.items, matches({ parent: parent, type: "compiler" }));
 		output.buffer = [];
 
 		proc.on('data', chunk => output.buffer.push(chunk.toString('ascii')));

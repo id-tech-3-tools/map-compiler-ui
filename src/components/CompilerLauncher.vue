@@ -26,7 +26,7 @@
 			<VueSwitch v-model="launcher.threads.enabled"/>
 			&nbsp; 
 			<VueSelect v-model="launcher.threads.value" v-tooltip="`Number of threads`" placeholder="Threads" class="threadsSelector">
-				<VueSelectButton value="-1" label="Auto"/>
+				<VueSelectButton :value="-1" label="Auto"/>
 				<VueSelectButton v-for="(thread, i) of threads" :key="i" :value="thread.value" :label="thread.label"/>
 			</VueSelect>
 		</div>

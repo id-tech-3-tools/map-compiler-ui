@@ -3,7 +3,7 @@
 		<div class="launcher-panel">
 			<compiler-launcher :launcher="launchers.compiler" @start="compilerStart" @stop="compilerStop"/>
 		</div>
-		<div class="launcher-panel">
+		<div v-if="allowBspc" class="launcher-panel">
 			<bspc-launcher :launcher="launchers.bspc" @start="bspcStart" @stop="bspcStop"/>
 		</div>
 		<div class="launcher-panel">
@@ -22,17 +22,33 @@
 
 	export default {
 		inject: ["api"],
+		data() {
+			return { 
+				gameDefinitions: this.api.get('/fs/game-definitions')
+			}
+		},
 		computed: {
+			projectId() {
+				return this.$route.params.id;
+			},
 			...mapField({
+				project (state) {
+					return find(state.projects.items, matches({ id: this.projectId }));
+				},
 				launchers(state) {
-					const matcher = matches({ parent: this.$route.params.id });
+					const matcher = matches({ parent: this.projectId });
 					return { 
 						compiler: find(state.launchers.compiler.items, matcher),  
 						bspc: find(state.launchers.bspc.items, matcher),  
 						game: find(state.launchers.game.items, matcher),  
 					}
 				}
-			})
+			}),
+			allowBspc() {
+				const gameDefinition = find(this.gameDefinitions, matches({ gameId: this.project.game }));
+				if (!gameDefinition) return false;
+				return Boolean(gameDefinition.BSPC);
+			}
 		},
 		methods: {
 			compilerStart(id) {

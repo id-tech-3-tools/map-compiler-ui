@@ -5,6 +5,7 @@ class OutputBuffer {
 		this.id = generateId('output');
 		this.parent = props.parent || "";
 		this.buffer = [];
+		this.type = props.type || "common"
 	}
 }
 

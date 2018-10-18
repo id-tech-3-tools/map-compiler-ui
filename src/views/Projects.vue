@@ -31,7 +31,7 @@
                 return this.$store.state.projects.items.length > 0;
             },
             projects() {
-                return this.$store.state.projects.items;
+                return this.$store.state.projects.items.map(item => item).reverse();
             }
         },
         methods: {

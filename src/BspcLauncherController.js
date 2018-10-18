@@ -11,9 +11,10 @@ import ArgumentStore from "@/libs/ArgumentStore"
 import { replaceString } from "./utils"
 
 class BspcLauncherController {
-	constructor(store, taskCtrl) {
+	constructor(store, taskCtrl, gameDefinitions) {
 		this.store = store;
 		this.taskCtrl = taskCtrl;
+		this.gameDefinitions = gameDefinitions;
 		this.workers = new Map();
 	}
 	create(props) {
@@ -45,6 +46,13 @@ class BspcLauncherController {
 		const project = find(this.store.projects.items, matches({ id: parent }));
 		const path = launcher.path ? launcher.path : launcher.custom;
 		const tasksEnabled = this.store.tasks.enabled;
+		const threads = launcher.threads.enabled ? launcher.threads.value : -1;
+		const gameDefinition = find(this.gameDefinitions, matches({ gameId: project.game }));
+
+		if (!gameDefinition.BSPC) {
+			console.warn("BSPC launcher attempted to run, but it's not enabled for the game, ignoring");
+			return;
+		}
 
 		launcher.message = "";
 		if (!project.game) {
@@ -65,18 +73,37 @@ class BspcLauncherController {
 		}
 
 		const env = { map: Path.basename(project.map, '.map'), mapPath: project.map };
-		const args = new ArgumentStore();
-		args.append(launcher.arguments.enabled ? replaceString(launcher.arguments.value, env) : "");
+		const stages = [];
+
+		// dirty hack, refactor required!
+		if (gameDefinition.compilerGameId == "wolf") {
+			for (let [i, fileName] of ["aascfg_sm.c", "aascfg_lg.c"].entries()) {
+				const args = new ArgumentStore();
+				args.append(launcher.arguments.enabled ? replaceString(launcher.arguments.value, env) : "");
+				args.append(`-ext _b${i} -cfg ${fileName}`)
+				args.append(`-threads ${threads} -forcesidesvisible -bsp2aas ${project.map} -output ${Path.dirname(project.map)}`);
+				stages.push(args.toArray())
+			}
+		}
+		else {
+			const args = new ArgumentStore();
+			args.append(launcher.arguments.enabled ? replaceString(launcher.arguments.value, env) : "");
+			args.append(`-threads ${threads} -forcesidesvisible -bsp2aas ${project.map} -output ${Path.dirname(project.map)}`);
+			stages.push(args.toArray())
+		}
+
 		const cwd = defaultTo(launcher.workDir.enabled ? launcher.workDir.value : undefined, Path.dirname(path));
 
-		const proc = new CompilerRunner(Path.resolve(path), [args.toArray()], { cwd });
+		const proc = new CompilerRunner(Path.resolve(path), stages, { cwd });
 		const startTask = (event) => () => tasksEnabled && this.taskCtrl.startBy({ event, parent, enabled: true });
 		const stopTask = (event) => () => tasksEnabled && this.taskCtrl.stopBy({ event, parent, enabled: true });
 		const startTasks = [startTask('before-bspc'), () => proc.run(), startTask('after-bspc')];
 		const stopTasks = [stopTask('before-bspc'), () => proc.kill(), stopTask('after-bspc')];
 		const worker = new TaskWorker(startTasks, stopTasks);
+		const output = find(this.store.output.items, matches({ parent: parent, type: "bspc" }));
+		output.buffer = [];
 
-		// proc.on('data', chunk => console.log(chunk.toString('ascii')));
+		proc.on('data', chunk => output.buffer.push(chunk.toString('ascii')));
 		proc.on('error', (error) => launcher.message = error);
 
 		this._wokerStarts(launcher, worker);
