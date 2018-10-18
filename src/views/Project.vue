@@ -15,14 +15,14 @@
 				<div class="main">
 					<div class="main-contents">
 						<compiler></compiler>
-						<VueTabs :tab-id.sync="tabId" group-class="primary start" animate>
+						<Tabs :tab-id.sync="tabId" group-class="primary start" animate>
 							<VueTab id="tab-presets" label="Presets" icon="assignment_turned_in">
 								<div class="tab-content"><presets></presets></div>
 							</VueTab>
-							<VueTab id="tab-output" label="Output" icon="announcement">
+							<VueTab id="tab-output" :label="outputLabel" icon="announcement">
 								<div class="tab-content"><output-printer></output-printer></div>
 							</VueTab>
-						</VueTabs>
+						</Tabs>
 					</div>
 				</div>
 			</div>
@@ -44,6 +44,8 @@
 	import Compiler from "@/components/Compiler"
 	import Presets from "@/components/Presets"
 	import OutputPrinter from "@/components/OutputPrinter"
+	import Tabs from "@/ext_components/Tabs"
+	import { countFinds } from '@/utils'
 
 	export default {
 		data() {
@@ -56,10 +58,21 @@
 			...mapField({
 				project (state) {
 					return find(state.projects.items, matches({ id: this.projectId }));
+				},
+				outputBuffer(state) {
+					const output = find(state.output.items, matches({ parent: this.projectId }));
+					return output.buffer;
 				}
-			})
+			}),
+			outputLabel() {
+				let lines = 0;
+				for (let buffer of this.outputBuffer) {
+					lines += countFinds(buffer, '\n');
+				}
+				return "Output" + (lines > 0 ? ` (${lines})` : "");
+			}
 		},
-		components: { ProjectSettings, Launchers, Tasks, Compiler, Presets, OutputPrinter }
+		components: { ProjectSettings, Launchers, Tasks, Compiler, Presets, OutputPrinter, Tabs }
 	}
 </script>
 
