@@ -16,6 +16,9 @@ export default new Vuex.Store({
         presets: { items: [] },
         output: {
             items: []
+        },
+        collapsers: {
+            items: {}
         }
     },
     mutations: {},

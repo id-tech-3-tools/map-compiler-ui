@@ -4,8 +4,10 @@
 			Compiler output &nbsp; 
 			<VueButton class="icon-button" @click="copy" :disabled="!output.buffer.length" icon-left="assignment" v-tooltip="`Copy to clipboard`" />
 		</div>
-		<div class="output">
-			<div v-if="output.buffer.length" ref="outputtext"><span v-for="(chunk, i) of output.buffer" :key="i">{{ chunk }}</span></div>
+		<div class="output" ref="outputtext">
+			<div v-if="output.buffer.length">
+				<span v-for="(chunk, i) of output.buffer" :key="i">{{ chunk }}</span>
+			</div>
 			<div v-else>No output was produced yet.</div>
 		</div>
 	</div>
@@ -23,6 +25,12 @@
 			},
 			output () { 
 				return find(this.$store.state.output.items, matches({ parent: this.projectId }));
+			}
+		},
+		updated() {
+			const node = this.$refs.outputtext;
+			if (node) {
+				node.scrollTop = node.scrollHeight;
 			}
 		},
 		methods: {

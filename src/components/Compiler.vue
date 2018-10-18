@@ -3,12 +3,12 @@
 		<h4>Compiler</h4>
 		<div class="compiler-ctrl-panel">
 			<div class="compiler-map-selector">
-				<VueSelect v-model="project.map" placeholder="Select map" class="map-selector" v-tooltip="`Select map`">
+				<VueSelect v-model="project.map" placeholder="Select map" class="map-selector" v-tooltip="`Select map`" :disabled="!isIdle">
 					<VueSelectButton v-for="map of maplist" :key="map.value" :value="map.value" :label="map.label"/>
 				</VueSelect>
 			</div>
 			<div class="compiler-ctrl">
-				<VueButton @click="updateMapList" v-tooltip="`Update map list`">Update</VueButton>
+				<VueButton @click="updateMapList" v-tooltip="`Update map list`" :disabled="!isIdle">Update</VueButton>
 				<span class="auto-toggle">
 					<VueSwitch v-model="launcher.auto" :disabled="isDisabled" v-tooltip="`Auto start compile on map change`">
 						Auto
@@ -20,6 +20,9 @@
 				<VueButton v-else @click="stop" class="danger">
 					<VueLoadingIndicator class="inline small indicator-color"/> &nbsp; Cancel	
 				</VueButton>
+			</div>
+			<div class="loading-bar">
+				<!-- <VueLoadingBar v-if="!isIdle" class="accent" unknown/> -->
 			</div>
 		</div>
 	</div>
@@ -129,7 +132,7 @@
 
 <style scoped>
 	.compiler-panel {
-		margin: 20px 0;
+		margin: 20px 0 10px 0;
 	}
 	.map-selector {
 		min-width: 300px;
@@ -150,6 +153,9 @@
 		display: grid;
 		grid-template-columns: auto auto auto;
 		grid-gap: 10px;
+	}
+	.loading-bar {
+		height: 5px;
 	}
 </style>
 
