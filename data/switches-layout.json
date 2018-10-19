@@ -263,6 +263,10 @@
                         "type": "number"
                     },
                     {
+                        "name": "cpma",
+                        "description": "CPMA vertex lighting mode"
+                    },
+                    {
                         "name": "custinfoparms",
                         "description": "Read scripts/custinfoparms.txt"
                     },
@@ -322,6 +326,11 @@
                         "description": "Force external lightmaps even if at size of internal lightmaps"
                     },
                     {
+                        "name": "extradist",
+                        "description": "Moves light sources from each sample or point by N.N units\n<F>",
+                        "type": "number"
+                    },
+                    {
                         "name": "extravisnudge",
                         "description": "Broken feature to nudge the luxel origin to a better vis cluster"
                     },
@@ -372,6 +381,16 @@
                         "type": "number"
                     },
                     {
+                        "name": "griddirectionality",
+                        "description": "...\n<F>",
+                        "type": "number"
+                    },
+                    {
+                        "name": "gridambientdirectionality",
+                        "description": "...\n<F>",
+                        "type": "number"
+                    },
+                    {
                         "name": "gridscale",
                         "description": "Scaling factor for the light grid only\n<F>",
                         "type": "number"
@@ -410,6 +429,14 @@
                     {
                         "name": "nogrid",
                         "description": "Disable grid light calculation (makes all entities fullbright)"
+                    },
+                    {
+                        "name": "nofloodlight",
+                        "description": "Disables floodlighting."
+                    },
+                    {
+                        "name": "nofloodstyles",
+                        "description": "Floodlighting disabled for styled lightmaps."
                     },
                     {
                         "name": "nolightmap",
@@ -519,34 +546,7 @@
                     {
                         "name": "wolf",
                         "description": "Use linear falloff curve by default (like W:ET)"
-                    },
-                    {
-                        "name": "nofloodlight",
-                        "description": "Disables floodlighting."
-                    },
-                    {
-                        "name": "nofloodstyles",
-                        "description": "Floodlighting disabled for styled lightmaps."
-                    },
-                    {
-                        "name": "griddirectionality",
-                        "description": "...\n<F>",
-                        "type": "number"
-                    },
-                    {
-                        "name": "gridambientdirectionality",
-                        "description": "...\n<F>",
-                        "type": "number"
-                    },
-                    {
-                        "name": "forcevertex",
-                        "description": "CPMA vertex lighting mode"
-                    },
-                    {
-                        "name": "lightnudge",
-                        "description": "Moves light sources from each sample or point by N.N units\n<F>",
-                        "type": "number"
-                    }
+                    }                    
                 ]
             },
             {
