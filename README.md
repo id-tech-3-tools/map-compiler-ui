@@ -28,6 +28,9 @@ However, in future more flexible game definition is planned, so adding new game 
 ## Screenshot
 ![Application](../master/data/doc/assets/app.png)
 
+## Documentation
+A brief user guide can be found [here](https://github.com/isRyven/map-compiler-ui/blob/master/data/doc/application.md).
+
 ## Code editing
 * run `yarn` or `npm install`
 * run `yarn serve:electron` or `npm run serve:electron`
