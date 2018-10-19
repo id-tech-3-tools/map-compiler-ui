@@ -3,8 +3,10 @@
 		<div v-if="project" class="columns">
 			<div>
 				<div class="sidebar">
-					<div class="backBtn">
-						<router-link to="/"><VueIcon icon="keyboard_backspace" class="medium"/>Project List</router-link>
+					<div class="button-back">
+						<router-link to="/">
+							<VueIcon icon="keyboard_backspace" class="medium"/> &nbsp; Project List
+						</router-link>
 					</div>
 					<project-settings></project-settings>
 					<launchers></launchers>
@@ -117,14 +119,14 @@
 	}
 	.main {
 		height: 100%;
-		overflow: auto;
+		overflow: hidden;
 		box-sizing: border-box;
 	}
 	.main-contents {
 		padding: 10px;
 	}
-	.backBtn {
-		margin: 20px 0;
+	.button-back {
+		margin: 15px 0 15px 0;
 	}
 </style>
 
