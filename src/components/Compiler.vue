@@ -8,7 +8,7 @@
 				</VueSelect>
 			</div>
 			<div class="compiler-ctrl">
-				<VueButton @click="updateMapList" v-tooltip="`Update map list`" :disabled="!isIdle">Update</VueButton>
+				<VueButton @click="updateMapList" class="icon-button" icon-left="autorenew" v-tooltip="`Update map list`" :disabled="!isIdle"/>
 				<span class="auto-toggle">
 					<VueSwitch v-model="launcher.auto" :disabled="isDisabled" v-tooltip="`Auto start compile on map change`">
 						Auto
@@ -140,7 +140,7 @@
 	.compiler-ctrl-panel {
 		max-width: 600px;
 		display: grid;
-		grid-template-columns: auto auto;
+		grid-template-columns: 350px auto;
 		grid-gap: 10px;
 	}
 	.compiler-map-selector > * {

@@ -26,6 +26,10 @@
 							<td>map:</td>
 							<td>{{ project.map || "none" }}</td>
 						</tr>
+						<tr>
+							<td>created:</td>
+							<td>{{ project.date.created | formatDate }}</td>
+						</tr>
 					</table>
 				</div> 
 			</div>
@@ -96,6 +100,12 @@
 			},
 			removeProject() {
 				this.api.post('/projects/remove', { id: this.project.id });
+			}
+		},
+		filters: {
+			formatDate(timestamp) {
+				// console.log(new Date(timestamp));
+				return new Date(timestamp).toLocaleString();
 			}
 		}
 	}

@@ -9,6 +9,10 @@ class Project {
 		this.map = ""; // map path
 		this.game = "";
 		this.mod = { enabled: false, value: "" };
+		this.date = {
+			created: Date.now(),
+			modified: Date.now()
+		}
 	}
 }
 
