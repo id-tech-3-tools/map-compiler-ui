@@ -35,7 +35,6 @@ function createMainWindow () {
         slashes: true
       })
     )
-    window.webContents.openDevTools()
   }
 
   window.on('closed', () => {
