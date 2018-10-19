@@ -66,8 +66,11 @@ function updateStateField(state, path, value, isArray = false) {
 class FMReactArray extends Array {
     constructor(updater, arr) {
         super();
-        super.push(...arr);
-        this._updater = updater;
+        // temp fix
+        if (arr) {
+            super.push(...arr);
+            this._updater = updater;
+        }
     }
     push(...props) {
         this._updater({ method: 'push', props });
