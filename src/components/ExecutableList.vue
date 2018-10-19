@@ -3,7 +3,9 @@
 		<div v-for="exec in executables" :key="exec.value" class="radio-entry">	
 			<label v-tooltip="exec.value">
 				<input type="radio" :value="exec.value" :name="name" v-model="executable" class="radio-btn">
-				<span class="radio-base">{{exec.label}}</span>
+				<span class="radio-base">
+					<img src="@/assets/cogs.svg" class="icon-left"> &nbsp; {{exec.label}}
+				</span>
 			</label>
 		</div>
 		<div>
@@ -80,9 +82,30 @@
 		border-radius: 100%; 
 		transition: background-color .3s ease;
 	}
+
+	@keyframes bulger {
+		0% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.2);
+		}
+		100% {
+			transform: scale(1);
+		}
+	}
+
 	.radio-btn:checked + .radio-base:before {
 		background: #42b983;
 		border: none;
+		animation: bulger .3s ease;
+	}
+	.icon-left {
+		vertical-align: middle;
+		width: 16px;
+		height: 16px;
+		position: relative;
+		top: -2px;
 	}
 </style>
 
