@@ -92,9 +92,10 @@
 			}
 		},
 		methods: {
-			calculateBufferLines(buffer) {
+			calculateBufferLines(buffers) {
+				if (!buffers) return 0;
 				let lines = 0;
-				for (let buffer of buffer) {
+				for (let buffer of buffers) {
 					lines += countFinds(buffer, '\n');
 				}
 				return lines;

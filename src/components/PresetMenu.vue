@@ -13,7 +13,7 @@
 			</div>
 			<div class="menu-panel-ctrl">
 				<VueButton @click="add" class="icon-button" icon-left="note_add" v-tooltip="`Add preset`"/>
-				<VueButton @click="reset" class="icon-button" icon-left="undo" :disabled="isEmpty || isFrozen" v-tooltip="`Undo changes`"/>
+				<VueButton @click="reset" class="icon-button" icon-left="undo" :disabled="isEmpty || isFrozen || !isModified" v-tooltip="`Undo changes`"/>
 				<VueButton @click="save" class="icon-button" icon-left="save" :disabled="isEmpty || isFrozen" v-tooltip="`Save preset`"/>
 				<VueButton @click="copy" class="icon-button" icon-left="add_to_photos" :disabled="isEmpty" v-tooltip="`Copy preset`"/>
 				<VueButton @click="edit" class="icon-button" icon-left="edit" :disabled="isEmpty || isFrozen" v-tooltip="`Edit preset`"/>
@@ -48,6 +48,10 @@
 				if (this.isEmpty) return true;
 				return this.preset.frozen;
 			},
+			isModified() {
+				if (this.isEmpty) return false;
+				return this.preset.modified;
+			}
 		},
 		methods: {
 			getLabel(preset) {
