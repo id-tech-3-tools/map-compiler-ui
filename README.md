@@ -29,17 +29,17 @@ However, in future more flexible game definition is planned, so adding new game 
 ![Application](../master/data/doc/assets/app.png)
 
 ## Binaries
-Windows binaries are available under the [releases](https://github.com/isRyven/map-compiler-ui/releases) tab.
+Windows binaries are available under the [releases](https://github.com/id-tech-3-tools/map-compiler-ui/releases) tab.
 
 ## Documentation
-A brief user guide can be found [here](https://github.com/isRyven/map-compiler-ui/blob/master/data/doc/application.md).
+A brief user guide can be found [here](https://github.com/id-tech-3-tools/map-compiler-ui/blob/master/data/doc/application.md).
 
 ## Code editing
 * run `yarn` or `npm install`
 * run `yarn serve:electron` or `npm run serve:electron`
 
 ## Notes
-The [switches layout](../master/data/switches-layout.json) is designed around [NetRadiant's Q3Map2](https://github.com/Garux/netradiant-custom/releases) and [Custom Q3Map2](https://github.com/isRyven/map-compiler) support.  
+The [switches layout](../master/data/switches-layout.json) is designed around [NetRadiant's Q3Map2](https://github.com/Garux/netradiant-custom/releases) and [Custom Q3Map2](https://github.com/id-tech-3-tools/map-compiler) support.  
 However most of the switches should also work with vanilla [2.5.17 Q3map2](http://icculus.org/gtkradiant/).
 
 ## License
