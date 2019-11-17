@@ -43,7 +43,7 @@ You can chose the predefined and custom presets (created by user). You cannot mo
 
 ## Game Launcher
 
-![Project Settings](./assets/bspc-launcher.png)
+![Project Settings](./assets/game-launcher.png)
 
 * Game launcher is used to quickly test maps with defined options. The supported game engines are deduced from the selected game directory in the project settings panel. You can also select custom engine using `Custom` button.  
 * You can enable/disable the launcher, to be run on each compilation process, by toggling the switch near the `Start` button. 
