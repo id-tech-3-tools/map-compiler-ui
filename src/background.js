@@ -7,6 +7,8 @@ import {
   createProtocol,
   installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib'
+import * as windowStateKeeper from 'electron-window-state'
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 if (isDevelopment) {
   // Don't load any native (external) modules until the following line is run:
@@ -19,7 +21,19 @@ let mainWindow
 // Standard scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true })
 function createMainWindow () {
-  const window = new BrowserWindow()
+  let mainWindowState = windowStateKeeper({
+    defaultWidth: 800,
+    defaultHeight: 600
+  });
+
+  const window = new BrowserWindow({
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    width: mainWindowState.width,
+    height: mainWindowState.height
+  })
+
+  mainWindowState.manage(window);
 
   if (isDevelopment) {
     // Load the url of the dev server if in development mode
