@@ -2,7 +2,7 @@
 	<div class="compiler-panel">
 		<h4>Compiler</h4>
 		<div class="compiler-ctrl-panel">
-			<div class="compiler-map-selector">
+			<div class="compiler-map-selector" v-on:keydown="selectMapByKey">
 				<VueSelect v-model="project.map" placeholder="Select map" class="map-selector" v-tooltip="`Select map`" :disabled="!isIdle">
 					<VueSelectButton v-for="map of maplist" :key="map.value" :value="map.value" :label="map.label"/>
 				</VueSelect>
@@ -34,6 +34,7 @@
 	import { find } from "lodash/collection"
 	import { matches } from "lodash/util"
 	import { mapField } from "@/libs/vuex-field-mapper.js"
+	import { selectNextByKey } from '@/utils.js'
 
 	export default {
 		inject: ['api'],
@@ -109,6 +110,18 @@
 			},
 			stop() {
 				this.api.post('/launchers/master/stop', { id: this.launcher.id });
+			},
+			selectMapByKey(ev) {
+				let maplist = this.maplist;
+				if (!maplist.length) {
+					return;
+				}
+				let selectedMap = this.project.map;
+				let selectedMapIndex = maplist.findIndex((i) => i.value === selectedMap);
+				let newSelection = selectNextByKey(maplist, selectedMapIndex, ev.key);
+				if (newSelection) {
+					this.project.map = newSelection;
+				}
 			},
 			async updateMapList() {
 				if (!this.project.path) return [];
