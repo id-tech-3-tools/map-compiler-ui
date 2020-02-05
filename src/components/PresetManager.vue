@@ -87,6 +87,16 @@
 							frozen: preset.frozen,
 							modified: !isEqual(preset.draft, preset.stages)
 						};
+					}).sort(function(a, b) {
+						let labelA = a.label.toUpperCase();
+						let labelB = b.label.toUpperCase();
+						if (labelA < labelB) {
+							return -1;
+						}
+						if (labelA > labelB) {
+							return 1;
+						}
+						return 0;
 					});
 
 					return { 

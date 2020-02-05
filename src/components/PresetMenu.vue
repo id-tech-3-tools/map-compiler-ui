@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="menu-panel">
-			<div class="menu-panel-list">
+			<div class="menu-panel-list" v-on:keydown="selectPresetByKey">
 				<VueSelect v-model="presets.selected" placeholder="Select preset" class="preset-selector" v-tooltip="`Select preset`">
 					<VueSelectButton 
 						v-for="preset in presets.items" 
@@ -26,6 +26,7 @@
 <script>
 	import { find } from "lodash/collection"
 	import { matches } from "lodash/util"
+	import { selectNextByKey } from '@/utils.js'
 
 	export default {
 		props: {
@@ -74,6 +75,18 @@
 			},
 			edit() {
 				this.$emit('action', { type: "show-edit" });
+			},
+			selectPresetByKey(ev) {
+				let presets = this.presets.items;
+				if (!presets.length) {
+					return;
+				}
+				let selectedPreset = this.presets.selected;
+				let selectedPresetIndex = presets.findIndex((i) => i.value === selectedPreset);
+				let newSelection = selectNextByKey(presets, selectedPresetIndex, ev.key);
+				if (newSelection) {
+					this.presets.selected = newSelection;
+				}
 			}
 		}
 	}
