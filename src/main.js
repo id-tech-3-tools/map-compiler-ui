@@ -249,6 +249,17 @@ api.route('/os/info', (payload) => {
 
 window.rystore = store;
 
+function restoreLastView() {
+    let currentPath = router.history.current.fullPath;
+    let lastPath = localStorage.lastPath;
+    if (lastPath && currentPath !== lastPath) {
+        console.log('⚡ restoring path: "' + lastPath + '"');
+        router.replace(lastPath);
+    }
+}
+
+restoreLastView();
+
 new Vue({
     provide: { api },
     router,
@@ -265,4 +276,5 @@ addEventListener('beforeunload', () => {
     fileSystem.writeJsonSync(`${cwd}/data/user/user-game-launchers.json`, gameLauncherCtrl.getUserLaunchers());
     fileSystem.writeJsonSync(`${cwd}/data/user/user-master-launchers.json`, masterLauncherCtrl.getUserLaunchers());
     fileSystem.writeJsonSync(`${cwd}/data/user/user-tasks.json`, taskCtrl.getUserTasks());
+    window.localStorage.setItem("lastPath", router.history.current.fullPath);
 });
