@@ -25,6 +25,7 @@
 
 <script>
 	import { find, map } from "lodash/collection"
+	import { pickBy } from "lodash/object"
 	import { matches } from "lodash/util"
 	import { mapField } from "@/libs/vuex-field-mapper.js"
 
@@ -54,7 +55,7 @@
 				}
 			}),
 			selectedSwitches() {
-				const switches = this.preset.draft[this.name].switches;
+				const switches = pickBy(this.preset.draft[this.name].switches, (value, key) => value.enabled);
 				const getValue = (opt) => opt.enabled ? " " + opt.value : "";
 				return map(switches, (value, key) => `-${key}${getValue(value)} `);
 			}
