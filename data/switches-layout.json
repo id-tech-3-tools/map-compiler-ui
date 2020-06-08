@@ -289,11 +289,13 @@
                     },
                     {
                         "name": "dirtdepth",
-                        "description": "Dirtmapping depth"
+                        "description": "Dirtmapping depth",
+                        "type": "number"
                     },
                     {
                         "name": "dirtgain",
-                        "description": "Dirtmapping exponent"
+                        "description": "Dirtmapping exponent",
+                        "type": "number"
                     },
                     {
                         "name": "dirtmode",
@@ -302,7 +304,8 @@
                     },
                     {
                         "name": "dirtscale",
-                        "description": "Dirtmapping scaling factor"
+                        "description": "Dirtmapping scaling factor",
+                        "type": "number"
                     },
                     {
                         "name": "dirty",
