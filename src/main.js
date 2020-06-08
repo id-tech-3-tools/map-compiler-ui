@@ -258,7 +258,15 @@ function restoreLastView() {
     }
 }
 
+function restoreTasksToggle() {
+    if (localStorage.getItem('tasksEnabled') !== undefined) {
+        let value = localStorage.getItem('tasksEnabled');
+        storeWrapper.tasks.enabled = value === "true";
+    }
+}
+
 restoreLastView();
+restoreTasksToggle();
 
 new Vue({
     provide: { api },
@@ -277,4 +285,5 @@ addEventListener('beforeunload', () => {
     fileSystem.writeJsonSync(`${cwd}/data/user/user-master-launchers.json`, masterLauncherCtrl.getUserLaunchers());
     fileSystem.writeJsonSync(`${cwd}/data/user/user-tasks.json`, taskCtrl.getUserTasks());
     window.localStorage.setItem("lastPath", router.history.current.fullPath);
+    window.localStorage.setItem("tasksEnabled", storeWrapper.tasks.enabled);
 });
