@@ -7,9 +7,10 @@
 </template>
 
 <script>
-import electron from 'electron';
 import Path from 'path'
-const { remote: { dialog } } = electron;
+
+const remote = require('@electron/remote');
+const { dialog } = remote;
 
 function openFileDialog(title, extensions = ['exe'], name = "") {
 	return dialog.showOpenDialog({ title, filters: [{ name, extensions }], properties: ['openFile'] });

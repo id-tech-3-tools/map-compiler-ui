@@ -9,6 +9,8 @@ import {
 } from 'vue-cli-plugin-electron-builder/lib'
 import * as windowStateKeeper from 'electron-window-state'
 
+require('@electron/remote/main').initialize()
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 if (isDevelopment) {
   // Don't load any native (external) modules until the following line is run:
@@ -19,7 +21,7 @@ if (isDevelopment) {
 let mainWindow
 
 // Standard scheme must be registered before the app is ready
-protocol.registerStandardSchemes(['app'], { secure: true })
+protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { standard: true, secure: true, supportFetchAPI: true } }]);
 function createMainWindow () {
   let mainWindowState = windowStateKeeper({
     defaultWidth: 800,
@@ -30,8 +32,15 @@ function createMainWindow () {
     x: mainWindowState.x,
     y: mainWindowState.y,
     width: mainWindowState.width,
-    height: mainWindowState.height
-  })
+    height: mainWindowState.height,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
+    },
+  });
+
+  require("@electron/remote/main").enable(window.webContents);
 
   mainWindowState.manage(window);
 
@@ -84,7 +93,7 @@ app.on('activate', () => {
 app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
-    await installVueDevtools()
+    // await installVueDevtools()
   }
   mainWindow = createMainWindow()
 })
