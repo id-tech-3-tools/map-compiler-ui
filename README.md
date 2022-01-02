@@ -35,8 +35,8 @@ Windows binaries are available under the [releases](https://github.com/id-tech-3
 A brief user guide can be found [here](https://github.com/id-tech-3-tools/map-compiler-ui/blob/master/data/doc/application.md).
 
 ## Code editing
-* run `yarn` or `npm install`
-* run `yarn serve:electron` or `npm run serve:electron`
+* run `yarn`
+* run `yarn serve:electron`
 
 ## Notes
 The [switches layout](../master/data/switches-layout.json) is designed around [NetRadiant's Q3Map2](https://github.com/Garux/netradiant-custom/releases) and [Custom Q3Map2](https://github.com/id-tech-3-tools/map-compiler) support.  
